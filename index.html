@@ -60,18 +60,18 @@
 
     // レイヤ更新関数
     function updateLayer() {
-      const thresh = +thresholdInput.kari;
+      const thresh = +thresholdInput.value;
       thresholdLabel.textContent = thresh;
       if (geojsonLayer) {
         map.removeLayer(geojsonLayer);
       }
       geojsonLayer = L.geoJSON(originalData, {
-        filter: feature => {
+        filter: features => {
           if (!filterToggle.checked) return true;
-          return feature.properties.kari >= thresh;
+          return features.properties.kari >= thresh;
         },
-        onEachFeature: (feature, layer) => {
-          layer.bindPopup(`値: ${feature.properties.kari}`);
+        onEachFeature: (features, layer) => {
+          layer.bindPopup(`値: ${features.properties.kari}`);
         }
       }).addTo(map);
       // フィーチャーがあれば範囲にフィット
