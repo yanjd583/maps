@@ -32,7 +32,7 @@
 <input type="range" id="threshold" min="1860" max="2100" value="1950">
 <label>
 <input type="checkbox" id="filter-toggle" checked>
-フィルタ有効（値 ≥ 閾値）2025-0827-04
+フィルタ有効（値 ≥ 閾値）2025-0827-05
 </label>
 </div>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
@@ -49,10 +49,23 @@
     const thresholdLabel = document.getElementById('threshold-label');
     const filterToggle = document.getElementById('filter-toggle');
 
+
+    var customIcon = L.icon({
+      iconUrl: 'https://cdn-icons-png.flaticon.com/512/684/684908.png',
+      iconSize: [24, 24],
+      iconAnchor: [12, 24],
+      popupAnchor: [0, -24]
+    });
+
     // GeoJSONを読み込んで初期化
     fetch('File_Station.geojson')
       .then(res => res.json())
       .then(data => {
+        L.geoJSON(data, {
+        // カスタムアイコンを設定する
+        pointToLayer: function(feature, latlng) {
+          return L.marker(latlng, {icon: customIcon});
+        }});
         originalData = data;
         updateLayer();
       })
