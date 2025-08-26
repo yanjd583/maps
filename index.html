@@ -68,10 +68,10 @@
       geojsonLayer = L.geoJSON(originalData, {
         filter: feature => {
           if (!filterToggle.checked) return true;
-          return feature.properties.start >= thresh;
+          return feature.properties.kari >= thresh;
         },
         onEachFeature: (feature, layer) => {
-          layer.bindPopup(`値: ${feature.properties.start}`);
+          layer.bindPopup(`値: ${feature.properties.kari}`);
         }
       }).addTo(map);
       // フィーチャーがあれば範囲にフィット
