@@ -1,15 +1,89 @@
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <meta charset="utf-8">
-    <title>アイコン表示</title>
-    <link href="style.css" rel="stylesheet">
-    <!-- Leaflet -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css" integrity="sha512-hoalWLoI8r4UszCkZ5kL8vayOGVae1oxXe/2A4AO6J9+580uKHDO3JdHb7NzwwzK5xr/Fs0W40kiNHxM9vyTtQ==" crossorigin=""/>
-    <script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js" integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ==" crossorigin=""></script>
+<!-- wexal_pst_init.js does not exist -->
+<meta charset="utf-8">
+<title>Leaflet GeoJSON Filter GUI デモ</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<style>
+    html, body, #map { margin:0; padding:0; width:100%; height:100vh; }
+    .controls {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      z-index: 1000;
+      background: rgba(255,255,255,0.9);
+      padding: 0.5rem;
+      border-radius: 4px;
+      font-size: 0.9rem;
+      box-shadow: 0 0 5px rgba(0,0,0,0.3);
+    }
+    .controls label { display: block; margin-bottom: 0.5rem; }
+    .controls input[type="range"] { width: 150px; }
+  </style>
 </head>
 <body>
-    <div id="map"></div>
-    <script src="main.js"></script>
+<div id="map"></div>
+<div class="controls">
+<label>
+フィルタ閾値: <span id="threshold-label">19500</span>
+</label>
+<input type="range" id="threshold" min="2200" max="1860" value="1950">
+<label>
+<input type="checkbox" id="filter-toggle" checked>
+フィルタ有効（値 ≥ 閾値）
+</label>
+</div>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+    const map = L.map('map', { zoomControl: false })
+      .setView([35.6895, 139.6917], 10);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '© OpenStreetMap contributors'
+    }).addTo(map);
+
+    let originalData, geojsonLayer;
+    const thresholdInput = document.getElementById('threshold');
+    const thresholdLabel = document.getElementById('threshold-label');
+    const filterToggle = document.getElementById('filter-toggle');
+
+    // GeoJSONを読み込んで初期化
+    fetch('FileStation.geojson')
+      .then(res => res.json())
+      .then(data => {
+        originalData = data;
+        updateLayer();
+      })
+      .catch(err => console.error('GeoJSON 読み込みエラー:', err));
+
+    // レイヤ更新関数
+    function updateLayer() {
+      const thresh = +thresholdInput.value;
+      thresholdLabel.textContent = thresh;
+      if (geojsonLayer) {
+        map.removeLayer(geojsonLayer);
+      }
+      geojsonLayer = L.geoJSON(originalData, {
+        filter: feature => {
+          if (!filterToggle.checked) return true;
+          return feature.properties.start >= thresh;
+        },
+        onEachFeature: (feature, layer) => {
+          layer.bindPopup(`値: ${feature.properties.start}`);
+        }
+      }).addTo(map);
+      // フィーチャーがあれば範囲にフィット
+      const layers = geojsonLayer.getLayers();
+      if (layers.length) {
+        map.fitBounds(geojsonLayer.getBounds());
+      }
+    }
+
+    // GUIイベント
+    thresholdInput.addEventListener('input', updateLayer);
+    filterToggle.addEventListener('change', updateLayer);
+  </script>
 </body>
 </html>
