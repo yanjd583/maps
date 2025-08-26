@@ -68,14 +68,19 @@
       geojsonLayer = L.geoJSON(originalData, {
         filter: features => {
           if (!filterToggle.checked) return true;
-          return features.properties.kari >= thresh;
+          return features.properties.kari <= thresh;
         },
         filter: features => {
           if (!filterToggle.checked) return true;
-          return features.properties.kari2 <= thresh;
+          return features.properties.kari2 >= thresh;
         },
         onEachFeature: (features, layer) => {
-          layer.bindPopup(`値: ${features.properties.N05_011}`);
+          layer.bindPopup(`駅名: ${features.properties.N05_011}</ br>
+          会社: ${features.properties.N05_003}</ br>
+          路線: ${features.properties.N05_002}</ br>
+          開: ${features.properties.start_org}</ br>
+          自: ${features.properties.start}</ br>
+          至: ${features.properties.end}`);
         }
       }).addTo(map);
      
