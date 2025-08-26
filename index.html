@@ -29,7 +29,7 @@
 <label>
 フィルタ閾値: <span id="threshold-label">1950</span>
 </label>
-<input type="range" id="threshold" min="1860" max="2200" value="1950">
+<input type="range" id="threshold" min="1860" max="2100" value="1950">
 <label>
 <input type="checkbox" id="filter-toggle" checked>
 フィルタ有効（値 ≥ 閾値）
@@ -66,10 +66,10 @@
         map.removeLayer(geojsonLayer);
       }
       geojsonLayer = L.geoJSON(originalData, {
-        filter: features => {
-          if (!filterToggle.checked) return true;
-          return features.properties.kari >= thresh;
-        },
+    //    filter: features => {
+    //      if (!filterToggle.checked) return true;
+    //      return features.properties.kari >= thresh;
+    //    },
         onEachFeature: (features, layer) => {
           layer.bindPopup(`値: ${features.properties.kari}`);
         }
