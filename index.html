@@ -66,19 +66,19 @@
         map.removeLayer(geojsonLayer);
       }
       geojsonLayer = L.geoJSON(originalData, {
-    //    filter: features => {
-    //      if (!filterToggle.checked) return true;
-    //      return features.properties.kari >= thresh;
-    //    },
+        filter: features => {
+          if (!filterToggle.checked) return true;
+          return features.properties.kari >= thresh;
+        },
+        filter: features => {
+          if (!filterToggle.checked) return true;
+          return features.properties.kari2 <= thresh;
+        },
         onEachFeature: (features, layer) => {
-          layer.bindPopup(`値: ${features.properties.kari}`);
+          layer.bindPopup(`値: ${features.properties.N05_011}`);
         }
       }).addTo(map);
-      // フィーチャーがあれば範囲にフィット
-      const layers = geojsonLayer.getLayers();
-      if (layers.length) {
-        map.fitBounds(geojsonLayer.getBounds());
-      }
+     
     }
 
     // GUIイベント
