@@ -60,7 +60,7 @@
 
     // レイヤ更新関数
     function updateLayer() {
-      const thresh = +thresholdInput.value;
+      const thresh = +thresholdInput.kari;
       thresholdLabel.textContent = thresh;
       if (geojsonLayer) {
         map.removeLayer(geojsonLayer);
