@@ -67,9 +67,9 @@ function updateLayer() {
       if (!filterToggle.checked) return true;
       return features.properties.start_y <= thresh && features.properties.end_y >= thresh;
     },
-    pointToLayer: function(features, latlng) {
-      return L.marker(latlng, {icon: customIcon});
-    },
+    //pointToLayer: function(features, latlng) {
+    //  return L.marker(latlng, {icon: customIcon});
+    //},
     
     onEachFeature: (features, layer) => {
       layer.bindPopup(`会社: ${features.properties.N05_003}<br>
@@ -82,4 +82,5 @@ function updateLayer() {
     }
     
   }).addTo(map);
+
 }
