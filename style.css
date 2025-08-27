@@ -13,9 +13,9 @@
 }
 
 .triangle {
-    display: flex!important;
+    /*display: flex!important;
     justify-content: center;
-    align-items: center;
+    align-items: center;*/
     border-left: 8.66px solid transparent;
     border-right: 8.66px solid transparent;
     border-bottom: 15px solid #ffffff;
@@ -33,4 +33,5 @@
     border: 2px solid #000000;
 
 }
+
 
