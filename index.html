@@ -32,7 +32,7 @@
 <input type="range" id="threshold" min="1860" max="2100" value="1950">
 <label>
 <input type="checkbox" id="filter-toggle" checked>
-フィルタ有効（値 ≥ 閾値）2025-0827-12
+フィルタ有効（値 ≥ 閾値）2025-0827-13
 </label>
 </div>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
@@ -57,12 +57,10 @@
     //  popupAnchor: [0, -24]
     //});
 
-    const geoJsonStyle = {
-      radius: 6,
-      color: "#7a7a7a",
-      fillColor: "#9a9a9a",
-      //fillOpacity: 0.5,
-    };
+    var customIcon = L.divIcon({
+        className: circle,
+        iconSize: [100, 100]
+    });
 
     // GeoJSONを読み込んで初期化
     fetch('File_Station.geojson')
@@ -86,10 +84,9 @@
           return features.properties.kari <= thresh && features.properties.kari2 >= thresh;
         },
 
-        style: geoJsonStyle,
-        //pointToLayer: function(features, latlng) {
-        //return L.marker(latlng, {icon: customIcon});
-        //},
+        pointToLayer: function(features, latlng) {
+          return L.marker(latlng, {icon: customIcon});
+        },
         
         onEachFeature: (features, layer) => {
           layer.bindPopup(`駅名: ${features.properties.N05_011}<br>
