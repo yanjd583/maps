@@ -4,8 +4,27 @@
     align-items: center;
     background: rgba(255, 255, 255, 1);
     border-radius: 50%;
-    border: 5px solid rgb(0, 0, 0);
+    border: 2px solid rgb(0, 0, 0);
     font-size: 16px;
     font-weight: bold;
-    color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
+}
+
+.triangle {
+    display: flex!important;
+    justify-content: center;
+    align-items: center;
+    border-left: 50px solid transparent;
+    border-right: 50px solid transparent;
+    border-bottom: 100px solid #ffffff;
+    border: 2px solid #000000;
+}
+
+.rhombus {
+    display: flex!important;
+    justify-content: center;
+    align-items: center;
+	transform: rotate(45deg);
+	background: #ffffff;
+    border: 2px solid #000000;
 }
