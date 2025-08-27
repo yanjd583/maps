@@ -1,5 +1,3 @@
-
-
 let originalData, geojsonLayer;
 const thresholdInput = document.getElementById('threshold');
 const thresholdLabel = document.getElementById('threshold-label');
@@ -32,7 +30,7 @@ function updateLayer() {
   geojsonLayer = L.geoJSON(originalData, {
     filter: features => {
       if (!filterToggle.checked) return true;
-      return features.properties.kari <= thresh && features.properties.kari2 >= thresh;
+      return features.properties.start_y <= thresh && features.properties.end_y >= thresh;
     },
     pointToLayer: function(features, latlng) {
       return L.marker(latlng, {icon: customIcon});
@@ -48,8 +46,4 @@ function updateLayer() {
     }
     
   }).addTo(map);
- 
 }
-// GUIイベント
-thresholdInput.addEventListener('input', updateLayer);
-filterToggle.addEventListener('change', updateLayer);
