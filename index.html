@@ -86,9 +86,10 @@
           return features.properties.kari <= thresh && features.properties.kari2 >= thresh;
         },
 
-        pointToLayer: function(features, latlng) {
-        return L.marker(latlng, {icon: customIcon});
-        },
+        style: geoJsonStyle,
+        //pointToLayer: function(features, latlng) {
+        //return L.marker(latlng, {icon: customIcon});
+        //},
         
         onEachFeature: (features, layer) => {
           layer.bindPopup(`駅名: ${features.properties.N05_011}<br>
