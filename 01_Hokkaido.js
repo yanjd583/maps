@@ -1,4 +1,5 @@
-let originalData, geojsonLayer;
+let sta01original, rail01original;
+let sta01layer, rail01layer;
 const thresholdInput = document.getElementById('threshold');
 const thresholdLabel = document.getElementById('threshold-label');
 const filterToggle = document.getElementById('filter-toggle');
@@ -16,7 +17,7 @@ var customIcon = L.divIcon({
 fetch('01_Sta_hokkaido.geojson')
   .then(res => res.json())
   .then(data => {
-    originalData = data;
+    sta01original = data;
     updateLayer();
   })
   .catch(err => console.error('GeoJSON 読み込みエラー:', err));
@@ -24,10 +25,10 @@ fetch('01_Sta_hokkaido.geojson')
 function updateLayer() {
   const thresh = +thresholdInput.value;
   thresholdLabel.textContent = thresh;
-  if (geojsonLayer) {
-    map.removeLayer(geojsonLayer);
+  if (sta01layer) {
+    map.removeLayer(sta01layer);
   }
-  geojsonLayer = L.geoJSON(originalData, {
+  sta01layer = L.geoJSON(sta01original, {
     filter: features => {
       if (!filterToggle.checked) return true;
       return features.properties.start_y <= thresh && features.properties.end_y >= thresh;
@@ -51,7 +52,7 @@ function updateLayer() {
 fetch('01_Rail_hokkaido.geojson')
   .then(res => res.json())
   .then(data => {
-    originalData = data;
+    rail01original = data;
     updateLayer();
   })
   .catch(err => console.error('GeoJSON 読み込みエラー:', err));
@@ -59,10 +60,10 @@ fetch('01_Rail_hokkaido.geojson')
 function updateLayer() {
   const thresh = +thresholdInput.value;
   thresholdLabel.textContent = thresh;
-  if (geojsonLayer) {
-    map.removeLayer(geojsonLayer);
+  if (rail01layer) {
+    map.removeLayer(rail01layer);
   }
-  geojsonLayer = L.geoJSON(originalData, {
+  rail01layer = L.geoJSON(rail01original, {
     filter: features => {
       if (!filterToggle.checked) return true;
       return features.properties.start_y <= thresh && features.properties.end_y >= thresh;
@@ -82,5 +83,4 @@ function updateLayer() {
     }
     
   }).addTo(map);
-
 }
