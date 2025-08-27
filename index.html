@@ -32,7 +32,7 @@
 <input type="range" id="threshold" min="1860" max="2100" value="1950">
 <label>
 <input type="checkbox" id="filter-toggle" checked>
-フィルタ有効（値 ≥ 閾値）2025-0827-10
+フィルタ有効（値 ≥ 閾値）2025-0827-11
 </label>
 </div>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
@@ -78,12 +78,10 @@
           if (!filterToggle.checked) return true;
           return features.properties.kari <= thresh && features.properties.kari2 >= thresh;
         },
-        L.geoJSON(data, {
-          // カスタムアイコンを設定する
-          pointToLayer: function(features, latlng) {
-            return L.marker(latlng, {icon: customIcon});
-          }
-        }),
+
+        pointToLayer: function(features, latlng) {
+        return L.marker(latlng, {icon: customIcon});
+        },
         
         onEachFeature: (features, layer) => {
           layer.bindPopup(`駅名: ${features.properties.N05_011}<br>
