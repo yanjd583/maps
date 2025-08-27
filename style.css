@@ -1,6 +1,6 @@
 .circle {
-    width: 10px;
-    height: 10px;
+    width: 8px;
+    height: 8px;
     display: flex!important;
     justify-content: center;
     align-items: center;
@@ -16,22 +16,19 @@
     /*display: flex!important;
     justify-content: center;
     align-items: center;*/
-    border-left: 8.66px solid transparent;
-    border-right: 8.66px solid transparent;
-    border-bottom: 15px solid #ffffff;
+    border-left: 4.62px solid transparent;
+    border-right: 4.62px solid transparent;
+    border-bottom: 8px solid #ffffff;
     /*border: 2px solid #000000;*/
 }
 
 .rhombus {
-    width: 10px;
-    height: 10px;
+    width: 8px;
+    height: 8px;
     display: flex!important;
     justify-content: center;
     align-items: center;
 	transform: rotate(45deg);
 	background: #ffffff;
     border: 2px solid #000000;
-
 }
-
-
