@@ -48,59 +48,59 @@
 
     
 
-let originalData, geojsonLayer;
-const thresholdInput = document.getElementById('threshold');
-const thresholdLabel = document.getElementById('threshold-label');
-const filterToggle = document.getElementById('filter-toggle');
-//var customIcon = L.icon({
-//  iconUrl: 'https://cdn-icons-png.flaticon.com/512/684/684908.png',
-//  iconSize: [24, 24],
-//  iconAnchor: [12, 24],
-//  popupAnchor: [0, -24]
-//});
-var customIcon = L.divIcon({
-    className: 'circle',
-    iconSize: [5, 5]
-});
-// GeoJSONを読み込んで初期化
-fetch('01_Sta_hokkaido.geojson')
-  .then(res => res.json())
-  .then(data => {
-    originalData = data;
-    updateLayer();
-  })
-  .catch(err => console.error('GeoJSON 読み込みエラー:', err));
-// レイヤ更新関数
-function updateLayer() {
-  const thresh = +thresholdInput.value;
-  thresholdLabel.textContent = thresh;
-  if (geojsonLayer) {
-    map.removeLayer(geojsonLayer);
-  }
-  geojsonLayer = L.geoJSON(originalData, {
-    filter: features => {
-      if (!filterToggle.checked) return true;
-      return features.properties.kari <= thresh && features.properties.kari2 >= thresh;
-    },
-    pointToLayer: function(features, latlng) {
-      return L.marker(latlng, {icon: customIcon});
-    },
-    
-    onEachFeature: (features, layer) => {
-      layer.bindPopup(`駅名: ${features.properties.N05_011}<br>
-      会社: ${features.properties.N05_003}<br>
-      路線: ${features.properties.N05_002}<br>
-      開: ${features.properties.start_org}<br>
-      自: ${features.properties.start}<br>
-      至: ${features.properties.end}`);
+  let originalData, geojsonLayer;
+  const thresholdInput = document.getElementById('threshold');
+  const thresholdLabel = document.getElementById('threshold-label');
+  const filterToggle = document.getElementById('filter-toggle');
+  //var customIcon = L.icon({
+  //  iconUrl: 'https://cdn-icons-png.flaticon.com/512/684/684908.png',
+  //  iconSize: [24, 24],
+  //  iconAnchor: [12, 24],
+  //  popupAnchor: [0, -24]
+  //});
+  var customIcon = L.divIcon({
+      className: 'circle',
+      iconSize: [5, 5]
+  });
+  // GeoJSONを読み込んで初期化
+  fetch('01_Sta_hokkaido.geojson')
+    .then(res => res.json())
+    .then(data => {
+      originalData = data;
+      updateLayer();
+    })
+    .catch(err => console.error('GeoJSON 読み込みエラー:', err));
+  // レイヤ更新関数
+  function updateLayer() {
+    const thresh = +thresholdInput.value;
+    thresholdLabel.textContent = thresh;
+    if (geojsonLayer) {
+      map.removeLayer(geojsonLayer);
     }
-    
-  }).addTo(map);
- 
-}
-// GUIイベント
-thresholdInput.addEventListener('input', updateLayer);
-filterToggle.addEventListener('change', updateLayer);
+    geojsonLayer = L.geoJSON(originalData, {
+      filter: features => {
+        if (!filterToggle.checked) return true;
+        return features.properties.start_y <= thresh && features.properties.end_y >= thresh;
+      },
+      pointToLayer: function(features, latlng) {
+        return L.marker(latlng, {icon: customIcon});
+      },
+      
+      onEachFeature: (features, layer) => {
+        layer.bindPopup(`駅名: ${features.properties.N05_011}<br>
+        会社: ${features.properties.N05_003}<br>
+        路線: ${features.properties.N05_002}<br>
+        開: ${features.properties.start_org}<br>
+        自: ${features.properties.start}<br>
+        至: ${features.properties.end}`);
+      }
+      
+    }).addTo(map);
+   
+  }
+  // GUIイベント
+  thresholdInput.addEventListener('input', updateLayer);
+  filterToggle.addEventListener('change', updateLayer);
 
 </script>
 
