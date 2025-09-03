@@ -30,3 +30,57 @@
 	background: #ffffff;
     border: 2px solid #000000;
 }
+
+.red {
+    background: #ff0000 !important;
+}
+.green {
+    background: #00ff00 !important;
+}  
+.blue {
+    background: #0000ff !important;
+}
+
+.yellow {
+    background: #ffff00 !important;
+}
+.black {
+    background: #000000 !important;
+    color: #ffffff !important;
+}
+.white {
+    background: #ffffff !important;
+}
+.orange {
+    background: #ffa500 !important;
+}
+.purple {
+    background: #800080 !important;
+}
+.pink {
+    background: #ffc0cb !important;
+}
+.brown {
+    background: #a52a2a !important;
+}
+.gray {
+    background: #808080 !important;
+}
+.cyan {
+    background: #00ffff !important;
+}
+.lime {
+    background: #00ff00 !important;
+}  
+.magenta {
+    background: #ff00ff !important;
+}
+.maroon {
+    background: #800000 !important;
+}
+.navy {
+    background: #000080 !important;
+}
+.olive {
+    background: #808000 !important;
+}
