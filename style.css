@@ -54,13 +54,13 @@
     color: #ff00ff !important;
 }
 .pink {
-    color: #ffc0cb !important;
+    color: #ff50cb !important;
 }
 .red {
     color: #ff0000 !important;
 }
 .orange {
-    color: #ffa500 !important;
+    color: #ff6500 !important;
 }
 .yellow {
     color: #ffff00 !important;
@@ -68,10 +68,10 @@
 .olive {
     color: #808000 !important;
 }
-.green {
-    color: #00ff00 !important;
+.greendark {
+    color: #008000 !important;
 }  
-.lime {
+.green {
     color: #00ff00 !important;
 }
 .cyan {
