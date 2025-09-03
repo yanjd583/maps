@@ -60,7 +60,8 @@ const filterToggle = document.getElementById('filter-toggle');
 //});
 var customIcon = L.divIcon({
     className: 'circle',
-    iconSize: [6, 6]
+    iconSize: [7, 7],
+    iconAnchor: [2, 2]
 });
 // GeoJSONを読み込んで初期化
 
@@ -102,7 +103,7 @@ function updateLayer() {
 
     geojsonStyle(features) {
       return {
-      color: 'gray',
+      color: "#000000",
       weight: 2, 
       //if (document.getElementById('N05_001').checked) {
       //  switch (features.properties.N05_001) {
@@ -183,4 +184,29 @@ function init(){
     
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
