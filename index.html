@@ -65,12 +65,12 @@ var customIcon = L.divIcon({
 });
 // GeoJSONを読み込んで初期化
 fetch('01_Sta_hokkaido.geojson')
-  .then(res => res01S.json())
-  .then(data => {
+  .then(resp => res01S.json())
+  .then(datas => {
     sta01original = data01S;
     updateLayer();
   })
-  .catch(err => console.error('GeoJSON 読み込みエラー:', err));
+  .catch(erro => console.error('GeoJSON 読み込みエラー:', err));
 
 fetch('01_Rail_hokkaido.geojson')
   .then(res => res.json())
@@ -145,6 +145,7 @@ function updateLayer() {
 
 </body>
 </html>
+
 
 
 
