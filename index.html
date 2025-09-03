@@ -36,18 +36,9 @@
 時系列有効
 </label>
 <br>
-<label>
-<input type="radio" id="N05_001" checked>
-種別
-</label>
-
-<input type="radio" id="gauge">
-<label>軌間
-</label>
-<label>
-<input type="radio" id="Electrific">
-電化
-</label>
+<label><input type="radio" id="N05_001" checked name="layer">種別</label>
+<label><input type="radio" id="gauge" name="layer">軌間</label>
+<label><input type="radio" id="Electrific" name="layer">電化</label>
     
 </div>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
@@ -165,6 +156,7 @@ function init(){
     
 </body>
 </html>
+
 
 
 
