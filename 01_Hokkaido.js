@@ -14,40 +14,6 @@ var customIcon = L.divIcon({
     iconSize: [5, 5]
 });
 // GeoJSONを読み込んで初期化
-fetch('01_Sta_hokkaido.geojson')
-  .then(res => res01S.json())
-  .then(data => {
-    sta01original = data01S;
-    updateLayer();
-  })
-  .catch(err => console.error('GeoJSON 読み込みエラー:', err));
-// レイヤ更新関数
-function updateLayer() {
-  const Sta01 = +thresholdInput.value;
-  thresholdLabel.textContent = Sta01;
-  if (sta01layer) {
-    map.removeLayer(sta01layer);
-  }
-  sta01layer = L.geoJSON(sta01original, {
-    filter: features => {
-      if (!filterToggle.checked) return true;
-      return features.properties.start_y <= Sta01 && features.properties.end_y >= Sta01;
-    },
-    pointToLayer: function(features, latlng) {
-      return L.marker(latlng, {icon: customIcon});
-    },
-    
-    onEachFeature: (features, layer) => {
-      layer.bindPopup(`駅名: ${features.properties.N05_011}<br>
-      会社: ${features.properties.N05_003}<br>
-      路線: ${features.properties.N05_002}<br>
-      開: ${features.properties.start_org}<br>
-      自: ${features.properties.start}<br>
-      至: ${features.properties.end}`);
-    }
-    
-  }).addTo(map);
-}
 
 fetch('01_Rail_hokkaido.geojson')
   .then(res => res.json())
@@ -56,12 +22,25 @@ fetch('01_Rail_hokkaido.geojson')
     updateLayer();
   })
   .catch(err => console.error('GeoJSON 読み込みエラー:', err));
+
+    
+fetch('01_Sta_hokkaido.geojson')
+  .then(res => res.json())
+  .then(data => {
+    sta01original = data;
+    updateLayer();
+  })
+  .catch(erro => console.error('GeoJSON 読み込みエラー:', err));
+
 // レイヤ更新関数
 function updateLayer() {
   const thresh = +thresholdInput.value;
   thresholdLabel.textContent = thresh;
   if (rail01layer) {
     map.removeLayer(rail01layer);
+  }
+  if (sta01layer) {
+    map.removeLayer(sta01layer);
   }
   rail01layer = L.geoJSON(rail01original, {
     filter: features => {
@@ -77,6 +56,26 @@ function updateLayer() {
       路線: ${features.properties.N05_002}<br>
       軌間: ${features.properties.gauge}<br>
       電化: ${features.properties.Electrific}<br>
+      開: ${features.properties.start_org}<br>
+      自: ${features.properties.start}<br>
+      至: ${features.properties.end}`);
+    }
+    
+  }).addTo(map);
+
+  sta01layer = L.geoJSON(sta01original, {
+    filter: features => {
+      if (!filterToggle.checked) return true;
+      return features.properties.start_y <= thresh && features.properties.end_y >= thresh;
+    },
+    pointToLayer: function(features, latlng) {
+      return L.marker(latlng, {icon: customIcon});
+    },
+    
+    onEachFeature: (features, layer) => {
+      layer.bindPopup(`駅名: ${features.properties.N05_011}<br>
+      会社: ${features.properties.N05_003}<br>
+      路線: ${features.properties.N05_002}<br>
       開: ${features.properties.start_org}<br>
       自: ${features.properties.start}<br>
       至: ${features.properties.end}`);
