@@ -109,22 +109,27 @@ function updateLayer() {
       };
 
       if (owner.checked) {
-        styleOptions.color = features.properties.N05_001 === '1' ? '#ff0000' :
-                             features.properties.N05_001 === '2' ? '#000000' :
-                             features.properties.N05_001 === '3' ? '#008800' :
-                             features.properties.N05_001 === '4' ? '#0088ff' : '#888888';
+        styleOptions.color = features.properties.N05_001 === '1' ? '#ff0000' ://赤
+                             features.properties.N05_001 === '2' ? '#000000' ://黒
+                             features.properties.N05_001 === '3' ? '#008800' ://緑
+                             features.properties.N05_001 === '4' ? '#0088ff' ://青
+                             features.properties.N05_001 === '5' ? '#558800' ://黄緑
+                             features.properties.N05_001 === '9' ? '#553300' ://茶
+                             '#888888';//灰
       } else if (gauge_size.checked) {
-        styleOptions.color = features.properties.gauge === 762 ? '#ff6600' :
-                             features.properties.gauge === 1050 ? '#008800' :
-                             features.properties.gauge === 1067 ? '#0088ff' :
-                             features.properties.gauge === 1372 ? '#880088' :
-                             features.properties.gauge === 1435 ? '#ff0000' : '#000000';
+        styleOptions.color = features.properties.gauge === 762 ? '#ff6600' ://橙
+                             features.properties.gauge === 1050 ? '#008800' ://緑
+                             features.properties.gauge === 1067 ? '#0088ff' ://青
+                             features.properties.gauge === 1372 ? '#880088' ://紫
+                             features.properties.gauge === 1435 ? '#ff0000' ://赤
+                             '#000000';//黒
       } else if (elect.checked) {
-        styleOptions.color = features.properties.Electrific === 'AC 25000V' ? '#ff0000' :
-                             features.properties.Electrific === 'AC 20000V' ? '#ff55cc' :
-                             features.properties.Electrific === 'DC 1500V' ? '#000088' :
-                             features.properties.Electrific === 'DC 750V' ? '#0088ff' :
-                             features.properties.Electrific === 'DC 600V' ? '#008800' : '#000000';
+        styleOptions.color = features.properties.Electrific === 'AC 25000V' ? '#ff0000' ://赤
+                             features.properties.Electrific === 'AC 20000V' ? '#ff55cc' ://桃
+                             features.properties.Electrific === 'DC 1500V' ? '#000088' ://紺
+                             features.properties.Electrific === 'DC 750V' ? '#0088ff' ://青
+                             features.properties.Electrific === 'DC 600V' ? '#008800' ://緑
+                             '#000000';//黒
       } else {
         styleOptions.color = 'red';
       }
@@ -183,29 +188,3 @@ function init(){
     
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
