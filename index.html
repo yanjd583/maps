@@ -27,14 +27,9 @@
 <body>
 <div id="map"></div>
 <div class="controls">
-<label>
-フィルタ閾値: <span id="threshold-label">1950</span>
-</label>
+<label>表示年: <span id="threshold-label">1950</span></label>
 <input type="range" id="threshold" min="1860" max="2100" value="1950">
-<label>
-<input type="checkbox" id="filter-toggle" checked>
-時系列有効
-</label>
+<label><input type="checkbox" id="filter-toggle" checked>時系列有効</label>
 <br>
 <label><input type="radio" id="N05_001" checked name="layer">種別</label>
 <label><input type="radio" id="gauge" name="layer">軌間</label>
@@ -104,6 +99,38 @@ function updateLayer() {
     //pointToLayer: function(features, latlng) {
     //  return L.marker(latlng, {icon: customIcon});
     //},
+
+    geojsonStyle(features) {
+      return {
+      color: 'gray',
+      weight: 2, 
+      //if (document.getElementById('N05_001').checked) {
+      //  switch (features.properties.N05_001) {
+      //    case '鉄道': return { color: 'blue', weight: 2 };
+      //    case '軌道': return { color: 'green', weight: 2 };
+      //    case 'モノレール': return { color: 'purple', weight: 2 };
+      //    case '新交通システム': return { color: 'orange', weight: 2 };
+      //    default: return { color: 'gray', weight: 2 };
+      //  }
+      //} else if (document.getElementById('gauge').checked) {
+      //  switch (features.properties.gauge) {
+      //    case '狭軌': return { color: 'red', weight: 2 };
+      //    case '標準軌': return { color: 'blue', weight: 2 };
+      //    case '広軌': return { color: 'green', weight: 2 };
+      //    default: return { color: 'gray', weight: 2 };
+      //  }
+      //} else if (document.getElementById('Electrific').checked) {
+      //  switch (features.properties.Electrific) {
+      //    case '直流1500V': return { color: 'red', weight: 2 };
+      //    case '交流20000V': return { color: 'blue', weight: 2 };
+      //    case '交流25000V': return { color: 'green', weight: 2 };
+      //    case '直流600V': return { color: 'orange', weight: 2 };
+      //    case '直流750V': return { color: 'purple', weight: 2 };
+      //    default: return { color: 'gray', weight: 2 };
+      //  }
+      //}
+      };
+    },
     
     onEachFeature: (features, layer) => {
       layer.bindPopup(`会社: ${features.properties.N05_003}<br>
@@ -156,28 +183,4 @@ function init(){
     
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
