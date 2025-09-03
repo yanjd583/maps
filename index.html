@@ -61,12 +61,7 @@ const filterToggle = document.getElementById('filter-toggle');
 var customIcon = L.divIcon({
     className: 'circle',
     iconSize: [7, 7],
-    iconAnchor: [0, 0]
 });
-const lineStyle = {
-    color: 'red',
-    weight: 10
-};
 // GeoJSONを読み込んで初期化
 
 fetch('01_Rail_hokkaido.geojson')
@@ -107,7 +102,7 @@ function updateLayer() {
 
     style:{
       color: 'red',
-      weight: 5
+      weight: features.properties.lines
     },
     
     onEachFeature: (features, layer) => {
@@ -161,7 +156,6 @@ function init(){
     
 </body>
 </html>
-
 
 
 
