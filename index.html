@@ -114,11 +114,11 @@ function updateLayer() {
                              features.properties.N05_001 === '3' ? '#008800' :
                              features.properties.N05_001 === '4' ? '#0088ff' : '#888888';
       } else if (gauge_size.checked) {
-        styleOptions.color = features.properties.gauge === '762' ? '#ff6600' :
-                             features.properties.gauge === '1050' ? '#008800' :
-                             features.properties.gauge === '1067' ? '#0088ff' :
-                             features.properties.gauge === '1372' ? '#880088' :
-                             features.properties.gauge === '1435' ? '#ff0000' : '#000000';
+        styleOptions.color = features.properties.gauge === 762 ? '#ff6600' :
+                             features.properties.gauge === 1050 ? '#008800' :
+                             features.properties.gauge === 1067 ? '#0088ff' :
+                             features.properties.gauge === 1372 ? '#880088' :
+                             features.properties.gauge === 1435 ? '#ff0000' : '#000000';
       } else if (elect.checked) {
         styleOptions.color = features.properties.Electrific === 'AC 25000V' ? '#ff0000' :
                              features.properties.Electrific === 'AC 20000V' ? '#ff55cc' :
