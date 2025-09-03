@@ -100,9 +100,11 @@ function updateLayer() {
     //  return L.marker(latlng, {icon: customIcon});
     //},
 
-    style:{
-      color: 'red',
-      weight: features.properties.lines
+    style: (features) => {
+      return {
+        color: 'red',
+        weight: features.properties.line
+      };
     },
     
     onEachFeature: (features, layer) => {
