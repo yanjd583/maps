@@ -31,7 +31,7 @@
 <input type="range" id="threshold" min="1860" max="2100" value="1950">
 <label><input type="checkbox" id="filter-toggle" checked>時系列有効</label>
 <br>
-<label><input type="radio" id="N05_001" checked name="layer">種別</label>
+<label><div id="popup"></div><input type="radio" id="N05_001" checked name="layer">種別</div></label>
 <label><input type="radio" id="gauge" name="layer">軌間</label>
 <label><input type="radio" id="Electrific" name="layer">電化</label>
     
@@ -185,10 +185,9 @@ function init(){
   filterToggle.addEventListener('change', updateLayer);
 
 </script>
-<p>test</p>
+    
 </body>
 </html>
-
 
 
 
