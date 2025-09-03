@@ -75,9 +75,9 @@ fetch('01_Rail_hokkaido.geojson')
 
     
 fetch('01_Sta_hokkaido.geojson')
-  .then(resp => res01S.json())
-  .then(datas => {
-    sta01original = data01S;
+  .then(res => res.json())
+  .then(data => {
+    sta01original = data;
     updateLayer();
   })
   .catch(erro => console.error('GeoJSON 読み込みエラー:', err));
@@ -146,6 +146,7 @@ function updateLayer() {
 
 </body>
 </html>
+
 
 
 
