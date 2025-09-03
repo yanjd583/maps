@@ -52,6 +52,9 @@ let sta01layer, rail01layer;
 const thresholdInput = document.getElementById('threshold');
 const thresholdLabel = document.getElementById('threshold-label');
 const filterToggle = document.getElementById('filter-toggle');
+const owner = document.getElementById('N05_001');
+const gauge_size = document.getElementById('gauge');
+const elect = document.getElementById('Electrific');
 //var customIcon = L.icon({
 //  iconUrl: 'https://cdn-icons-png.flaticon.com/512/684/684908.png',
 //  iconSize: [24, 24],
@@ -101,10 +104,32 @@ function updateLayer() {
     //},
 
     style: (features) => {
-      return {
-        color: 'red',
-        weight: features.properties.line
+      const styleOptions = {
+        weight: features.properties.line * 2
       };
+
+      if (owner.checked) {
+        styleOptions.color = features.properties.N05_001 === '1' ? 'red' :
+                             features.properties.N05_001 === '2' ? 'black' :
+                             features.properties.N05_001 === '3' ? 'green' :
+                             features.properties.N05_001 === '4' ? 'blue' : 'gray';
+      } else if (gauge_size.checked) {
+        styleOptions.color = features.properties.gauge === '762' ? 'orange' :
+                             features.properties.gauge === '1050' ? 'green' :
+                             features.properties.gauge === '1067' ? 'blue' :
+                             features.properties.gauge === '1372' ? 'purple' :
+                             features.properties.gauge === '1435' ? 'red' : 'black';
+      } else if (elect.checked) {
+        styleOptions.color = features.properties.Electrific === 'AC 25000V' ? 'red' :
+                             features.properties.Electrific === 'AC 20000V' ? 'pink' :
+                             features.properties.Electrific === 'DC 1500V' ? 'navy' :
+                             features.properties.Electrific === 'DC 750V' ? 'blue' :
+                             features.properties.Electrific === 'DC 600V' ? 'green' : 'black';
+      } else {
+        styleOptions.color = 'red';
+      }
+
+      return styleOptions;
     },
     
     onEachFeature: (features, layer) => {
