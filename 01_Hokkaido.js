@@ -49,38 +49,3 @@ function updateLayer() {
   }).addTo(map);
 }
 
-fetch('01_Rail_hokkaido.geojson')
-  .then(res => res.json())
-  .then(data => {
-    rail01original = data;
-    updateLayer();
-  })
-  .catch(err => console.error('GeoJSON 読み込みエラー:', err));
-// レイヤ更新関数
-function updateLayer() {
-  const thresh = +thresholdInput.value;
-  thresholdLabel.textContent = thresh;
-  if (rail01layer) {
-    map.removeLayer(rail01layer);
-  }
-  rail01layer = L.geoJSON(rail01original, {
-    filter: features => {
-      if (!filterToggle.checked) return true;
-      return features.properties.start_y <= thresh && features.properties.end_y >= thresh;
-    },
-    //pointToLayer: function(features, latlng) {
-    //  return L.marker(latlng, {icon: customIcon});
-    //},
-    
-    onEachFeature: (features, layer) => {
-      layer.bindPopup(`会社: ${features.properties.N05_003}<br>
-      路線: ${features.properties.N05_002}<br>
-      軌間: ${features.properties.gauge}<br>
-      電化: ${features.properties.Electrific}<br>
-      開: ${features.properties.start_org}<br>
-      自: ${features.properties.start}<br>
-      至: ${features.properties.end}`);
-    }
-    
-  }).addTo(map);
-}
