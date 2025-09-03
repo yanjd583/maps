@@ -135,6 +135,12 @@ function updateLayer() {
 }
 
 
+    var overlay = {
+        "rail": rail01layer,
+        "station": sta01layer
+    }
+    L.control.layers(null, overlay).addTo(map);
+
     
 
   // GUIイベント
@@ -145,6 +151,7 @@ function updateLayer() {
     
 </body>
 </html>
+
 
 
 
