@@ -61,8 +61,12 @@ const filterToggle = document.getElementById('filter-toggle');
 var customIcon = L.divIcon({
     className: 'circle',
     iconSize: [7, 7],
-    iconAnchor: [2, 2]
+    iconAnchor: [-2, -2]
 });
+const lineStyle = {
+    color: 'red',
+    weight: 2
+};
 // GeoJSONを読み込んで初期化
 
 fetch('01_Rail_hokkaido.geojson')
@@ -101,37 +105,7 @@ function updateLayer() {
     //  return L.marker(latlng, {icon: customIcon});
     //},
 
-    geojsonStyle(features) {
-      return {
-      color: "#000000",
-      weight: 2, 
-      //if (document.getElementById('N05_001').checked) {
-      //  switch (features.properties.N05_001) {
-      //    case '鉄道': return { color: 'blue', weight: 2 };
-      //    case '軌道': return { color: 'green', weight: 2 };
-      //    case 'モノレール': return { color: 'purple', weight: 2 };
-      //    case '新交通システム': return { color: 'orange', weight: 2 };
-      //    default: return { color: 'gray', weight: 2 };
-      //  }
-      //} else if (document.getElementById('gauge').checked) {
-      //  switch (features.properties.gauge) {
-      //    case '狭軌': return { color: 'red', weight: 2 };
-      //    case '標準軌': return { color: 'blue', weight: 2 };
-      //    case '広軌': return { color: 'green', weight: 2 };
-      //    default: return { color: 'gray', weight: 2 };
-      //  }
-      //} else if (document.getElementById('Electrific').checked) {
-      //  switch (features.properties.Electrific) {
-      //    case '直流1500V': return { color: 'red', weight: 2 };
-      //    case '交流20000V': return { color: 'blue', weight: 2 };
-      //    case '交流25000V': return { color: 'green', weight: 2 };
-      //    case '直流600V': return { color: 'orange', weight: 2 };
-      //    case '直流750V': return { color: 'purple', weight: 2 };
-      //    default: return { color: 'gray', weight: 2 };
-      //  }
-      //}
-      };
-    },
+    style: lineStyle,
     
     onEachFeature: (features, layer) => {
       layer.bindPopup(`会社: ${features.properties.N05_003}<br>
