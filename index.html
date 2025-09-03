@@ -61,11 +61,11 @@ const filterToggle = document.getElementById('filter-toggle');
 var customIcon = L.divIcon({
     className: 'circle',
     iconSize: [7, 7],
-    iconAnchor: [-2, -2]
+    iconAnchor: [0, 0]
 });
 const lineStyle = {
     color: 'red',
-    weight: 2
+    weight: 10
 };
 // GeoJSONを読み込んで初期化
 
@@ -105,7 +105,10 @@ function updateLayer() {
     //  return L.marker(latlng, {icon: customIcon});
     //},
 
-    style: lineStyle,
+    style{
+      color: 'red',
+      weight: 5
+    },
     
     onEachFeature: (features, layer) => {
       layer.bindPopup(`会社: ${features.properties.N05_003}<br>
