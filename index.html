@@ -73,7 +73,7 @@ fetch('01_Sta_hokkaido.geojson')
   .catch(err => console.error('GeoJSON 読み込みエラー:', err));
 // レイヤ更新関数
 function updateLayer() {
-  const thresh = +thresholdInput.value;
+  const Sta01 = +thresholdInput.value;
   thresholdLabel.textContent = thresh;
   if (sta01layer) {
     map.removeLayer(sta01layer);
@@ -108,7 +108,7 @@ fetch('01_Rail_hokkaido.geojson')
   .catch(err => console.error('GeoJSON 読み込みエラー:', err));
 // レイヤ更新関数
 function updateLayer() {
-  const thresh = +thresholdInput.value;
+  const Rail01 = +thresholdInput.value;
   thresholdLabel.textContent = thresh;
   if (rail01layer) {
     map.removeLayer(rail01layer);
@@ -147,4 +147,5 @@ function updateLayer() {
 
 </body>
 </html>
+
 
