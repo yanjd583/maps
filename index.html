@@ -113,11 +113,12 @@ function updateLayer() {
       if (owner.checked) {
         styleOptions.color = features.properties.N05_001 === '1' ? '#ff0000' ://赤
                              features.properties.N05_001 === '2' ? '#000000' ://黒
-                             features.properties.N05_001 === '3' ? '#008800' ://緑
-                             features.properties.N05_001 === '4' ? '#0088ff' ://青
+                             features.properties.N05_001 === '3' ? '#0088ff' ://青
+                             features.properties.N05_001 === '4' ? '#008800' ://緑
                              features.properties.N05_001 === '5' ? '#008888' ://青緑
-                             features.properties.N05_001 === '9' ? '#553300' ://茶
-                             '#888888';//灰
+                             features.properties.N05_001 === '6' ? '#880088' ://紫
+                             features.properties.N05_001 === '7' ? '#553300' ://茶
+                             '#555555';//灰
       } else if (gauge_size.checked) {
         styleOptions.color = features.properties.gauge === 762 ? '#ff6600' ://橙
                              features.properties.gauge === 1050 ? '#008800' ://緑
