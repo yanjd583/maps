@@ -31,14 +31,18 @@
 <input type="range" id="threshold" min="1860" max="2100" value="1950">
 <label><input type="checkbox" id="filter-toggle" checked>時系列有効</label>
 <br>
-<label><input type="radio" id="N05_001" checked name="layer">種別</label>
-<label><input type="radio" id="gauge" name="layer">軌間</label>
-<label><input type="radio" id="Electrific" name="layer">電化</label>
+<label><input type="radio" id="N05_001" checked name="layer" value="1">種別</label>
+<div id="aaa" style="display:name;">あああ</div>
+<label><input type="radio" id="gauge" name="layer" value="2">軌間</label>
+<div id="iii" style="display:name;">いいい</div>
+<label><input type="radio" id="Electrific" name="layer" value="3">電化</label>
+<div id="uuu" style="display:name;">ううう</div>
 
 <iframe src="hanrei.html" width="150px" height="310px"></iframe>
 
 </div>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="01_Hokkaido.js"></script>
 
 <script>
   const map = L.map('map', { zoomControl: false })
@@ -117,10 +121,10 @@ function updateLayer() {
                              features.properties.N05_001 === '4' ? '#008800' ://緑
                              features.properties.N05_001 === '5' ? '#0088ff' ://青
                              features.properties.N05_001 === '6' ? '#880088' ://紫
-                             features.properties.N05_001 === '7' ? '#553300' ://茶
+                             features.properties.N05_001 === '7' ? '#773300' ://茶
                              '#777777';//灰
       } else if (gauge_size.checked) {
-        styleOptions.color = features.properties.gauge === 762 ? '#553300' ://茶
+        styleOptions.color = features.properties.gauge === 762 ? '#773300' ://茶
                              features.properties.gauge === 1050 ? '#008800' ://緑
                              features.properties.gauge === 1067 ? '#0088ff' ://青
                              features.properties.gauge === 1372 ? '#880088' ://紫

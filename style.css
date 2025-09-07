@@ -32,7 +32,10 @@
 }
 
 .blue {
-    background: #008888;
+    background: #000044;
 }
 
 
+#aaa, #iii, #uuu {
+  display: none;
+}
