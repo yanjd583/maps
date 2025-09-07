@@ -32,56 +32,98 @@
 }
 
 
+.redcolor {
+  color: #ff0000;
+}
+.pink_color {
+  color: #ff55cc;
+}
+.green_color {
+  color: #008800;
+}
+.blue_color {
+  color: #0088ff;
+}
+.navy_color {
+  color: #0000aa;
+}
+.purple_color {
+  color: #880088;
+}
+.brown_color {
+  color: #773300;
+}
+.black_color {
+  color: #000000;
+}
+.gray_color {
+  color: #777777;
+}
+.white_color {
+  color: #ffffff;
+}
 
-.red {
+
+
+.red_line {
   width: 110px;
   height:0px;
-  border: 2px solid #ff0000;
+  border: 2px solid;
+  border-color: redcolor;
 }
-.pink {
+.pink_line {
   width: 110px;
   height:0px;
-  border: 2px solid #ff55cc;
+  border: 2px solid;
+  border-color: pink_color;
 }
-.green {
+.green_line {
   width: 110px;
   height:0px;
-  border: 2px solid #008800;
+  border: 2px solid;
+  border-color: green_color;
 }
-.blue {
+.blue_line {
   width: 110px;
   height:0px;
-  border: 2px solid #0088ff;
+  border: 2px solid;
+  border-color: blue_color;
 }
-.navy {
+.navy_line {
   width: 110px;
   height:0px;
-  border: 2px solid #0000aa;
+  border: 2px solid;
+  border-color: navy_color;
 }
-.purple {
+.purple_line {
   width: 110px;
   height:0px;
-  border: 2px solid #880088;
+  border: 2px solid;
+  border-color: purple_color;
 }
-.brown {
+.brown_line {
   width: 110px;
   height:0px;
-  border: 2px solid #773300;
+  border: 2px solid;
+  border-color: brown_color;
 }
-.black {
+.black_line {
   width: 110px;
   height:0px;
-  border: 2px solid #000000;
+  border: 2px solid;
+  border-color: black_color;
 }
-.gray {
+.gray_line {
   width: 110px;
   height:0px;
-  border: 2px solid #777777;
+  border: 2px solid;
+  border-color: gray_color;
 }
-.white {
+.white_line {
   width: 110px;
   height:0px;
-  border: 2px solid #ffffff;
+  border: 2px solid;
+  border-color: white_color;
 }
 
 
