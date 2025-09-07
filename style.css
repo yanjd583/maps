@@ -4,10 +4,10 @@
     align-items: center;
     background: rgba(255, 255, 255, 1);
     border-radius: 50%;
-    border: 2px solid rgb(0, 0, 0);
+    border: 2px solid black;
     font-size: 16px;
     font-weight: bold;
-    color: rgb(0, 0, 0);
+    color: black;
 }
 
 .triangle {
@@ -16,7 +16,7 @@
     align-items: center;*/
     border-left: 4.62px solid transparent;
     border-right: 4.62px solid transparent;
-    border-bottom: 8px solid #ffffff;
+    border-bottom: 8px solid white;
     /*border: 2px solid #000000;*/
 }
 
@@ -27,12 +27,56 @@
     justify-content: center;
     align-items: center;
 	transform: rotate(45deg);
-	background: #ffffff;
-    border: 2px solid #000000;
+	background: white;
+    border: 2px solid black;
 }
 
+
+
+.red {
+  width: 110px;
+  height:0px;
+  border: 2px solid #ff0000;
+}
+.black {
+  width: 110px;
+  height:0px;
+  border: 2px solid #000000;
+}
+.green {
+  width: 110px;
+  height:0px;
+  border: 2px solid #008800;
+}
 .blue {
-    background: #000044;
+  width: 110px;
+  height:0px;
+  border: 2px solid #0088ff;
+}
+.navy {
+  width: 110px;
+  height:0px;
+  border: 2px solid #0000aa;
+}
+.purple {
+  width: 110px;
+  height:0px;
+  border: 2px solid #880088;
+}
+.brown {
+  width: 110px;
+  height:0px;
+  border: 2px solid #773300;
+}
+.gray {
+  width: 110px;
+  height:0px;
+  border: 2px solid #777777;
+}
+.white {
+  width: 110px;
+  height:0px;
+  border: 2px solid #ffffff;
 }
 
 
