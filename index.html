@@ -155,11 +155,11 @@ function updateLayer() {
                              features.properties.N05_001 === '7' ? '#773300' ://茶
                              '#777777';//灰
       } else if (gauge_size.checked) {
-        styleOptions.color = features.properties.gauge === 762 ? '#773300' ://茶
-                             features.properties.gauge === 1050 ? '#008800' ://緑
-                             features.properties.gauge === 1067 ? '#0088ff' ://青
+        styleOptions.color = features.properties.gauge === 1435 ? '#ff0000' ://赤
                              features.properties.gauge === 1372 ? '#880088' ://紫
-                             features.properties.gauge === 1435 ? '#ff0000' ://赤
+                             features.properties.gauge === 1067 ? '#0088ff' ://青
+                             features.properties.gauge === 1050 ? '#008800' ://緑
+                             features.properties.gauge === 762 ? '#773300' ://茶
                              '#000000';//黒
       } else if (elect.checked) {
         styleOptions.color = features.properties.Electrific === 'AC 25000V' ? '#ff0000' ://赤
@@ -169,7 +169,7 @@ function updateLayer() {
                              features.properties.Electrific === 'DC 600V' ? '#008800' ://緑
                              '#000000';//黒
       } else {
-        styleOptions.color = 'red';
+        styleOptions.color = '#000000';//黒
       }
 
       return styleOptions;
