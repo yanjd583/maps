@@ -92,22 +92,12 @@ const filterToggle = document.getElementById('filter-toggle');
 const owner = document.getElementById('N05_001');
 const gauge_size = document.getElementById('gauge');
 const elect = document.getElementById('Electrific');
-//var customIcon = L.icon({
-//  iconUrl: 'https://cdn-icons-png.flaticon.com/512/684/684908.png',
-//  iconSize: [24, 24],
-//  iconAnchor: [12, 24],
-//  popupAnchor: [0, -24]
-//});
-//var customIcon = L.divIcon({
-//    className: 'circle',
-//    //iconSize: [8, 8],
-//    iconAnchor: [5, 5],
-//});
-var customIcon = L.divIcon({
-    className: 'pentagon',
-    //iconSize: [8, 8],
-    iconAnchor: [5, 6],
-});
+
+
+//var svgString = '<svg viewBox="0 0 24 24"><path d="M12, 8c-3, 0-5, 2-5, 5s2, 5, 5, 5c3, 0, 5-2, 5-5S15, 8, 12, 8z"/></svg>';
+var svgIcon = L.icon({content: sta.svg, iconSize: [24, 24]});
+//var marker = L.marker([50, 0], {icon: svgIcon});
+
 
 // GeoJSONを読み込んで初期化
 
@@ -200,7 +190,7 @@ function updateLayer() {
       return features.properties.start_y <= thresh && features.properties.end_y >= thresh;
     },
     pointToLayer: function(features, latlng) {
-      return L.marker(latlng, {icon: customIcon});
+      return L.marker(latlng, {icon: svgIcon});
     },
     
     onEachFeature: (features, layer) => {
@@ -233,7 +223,6 @@ function init(){
     
 </body>
 </html>
-
 
 
 
