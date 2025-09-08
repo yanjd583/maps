@@ -1,6 +1,6 @@
 .circle {
-  width: 8px;
-  height: 8px;
+    width: 8px;
+    height: 8px;
     display: flex!important;
     justify-content: center;
     align-items: center;
@@ -13,10 +13,11 @@
 }
 
 .triangle {
-  background: #ffffff;
-  height: calc(tan(60deg) * 60px / 2);
-  width: 60px;
-  clip-path: polygon(50% 0, 100% 100%, 0 100%);
+    background: #ffffff;
+    height: calc(tan(60deg) * 60px / 2);
+    width: 60px;
+    clip-path: polygon(50% 0, 100% 100%, 0 100%);
+    border: 2px solid black;
 }
 
 .rhombus {
