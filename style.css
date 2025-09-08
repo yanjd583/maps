@@ -13,13 +13,10 @@
 }
 
 .triangle {
-    /*display: flex!important;
-    justify-content: center;
-    align-items: center;*/
-    border-bottom: 8px solid white;
-    border-left: 4.62px solid transparent;
-    border-right: 4.62px solid transparent;
-    /*border: 2px solid #000000;*/
+  background: #ffffff;
+  height: calc(tan(60deg) * 60px / 2);
+  width: 60px;
+  clip-path: polygon(50% 0, 100% 100%, 0 100%);
 }
 
 .rhombus {
