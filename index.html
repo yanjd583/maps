@@ -93,7 +93,10 @@ const owner = document.getElementById('N05_001');
 const gauge_size = document.getElementById('gauge');
 const elect = document.getElementById('Electrific');
 
-var svgIcon = L.icon({iconUrl: 'sta.svg', iconSize: [10, 10]});
+var sta = L.icon({iconUrl: 'sta.svg', iconSize: [10, 10]});
+var sig = L.icon({iconUrl: 'sig_sta.svg', iconSize: [10, 10]});
+var fre = L.icon({iconUrl: 'fre_sta.svg', iconSize: [10, 10]});
+var bus = L.icon({iconUrl: 'bus_sta.svg', iconSize: [10, 10]});
 
 
 // GeoJSONを読み込んで初期化
@@ -187,7 +190,13 @@ function updateLayer() {
       return features.properties.start_y <= thresh && features.properties.end_y >= thresh;
     },
     pointToLayer: function(features, latlng) {
-      return L.marker(latlng, {icon: svgIcon});
+      var sta = features.properties.type === '信号場' ? 'sig_st.svg' :
+                features.properties.type === '仮信号場' ? 'sig_sta.svg' :
+                features.properties.type === '貨物駅' ? 'fra_sta.svg' :
+                features.properties.type === '仮貨物駅' ? 'fra_sta.svg' :
+                features.properties.type === 'バス停' ? 'bus_sta.svg' :
+                'sta.svg';
+      return L.marker(latlng, {icon: sta});
     },
     
     onEachFeature: (features, layer) => {
