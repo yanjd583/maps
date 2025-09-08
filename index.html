@@ -108,16 +108,12 @@ var customIcon = L.divIcon({
     //iconSize: [8, 8],
     iconAnchor: [5, 6],
 });
-var customIcon = L.divIcon({
+var customIcon2 = L.divIcon({
     className: 'triangle',
     //iconSize: [8, 8],
     iconAnchor: [5, 6],
 });
-var customIcon = L.divIcon({
-    className: 'triangle',
-    //iconSize: [8, 8],
-    iconAnchor: [5, 6],
-});
+
 // GeoJSONを読み込んで初期化
 
 fetch('01_Rail_hokkaido.geojson')
@@ -210,6 +206,9 @@ function updateLayer() {
     },
     pointToLayer: function(features, latlng) {
       return L.marker(latlng, {icon: customIcon});
+    },
+    pointToLayer: function(features, latlng) {
+      return L.marker(latlng, {icon: customIcon2});
     },
     
     onEachFeature: (features, layer) => {
