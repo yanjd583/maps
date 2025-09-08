@@ -190,13 +190,13 @@ function updateLayer() {
       return features.properties.start_y <= thresh && features.properties.end_y >= thresh;
     },
     pointToLayer: function(features, latlng) {
-      var sta = features.properties.type === '信号場' ? sig_st.svg :
+      var sta = features.properties.type === '信号場' ? sig_sta.svg :
                 features.properties.type === '仮信号場' ? sig_sta.svg :
                 features.properties.type === '貨物駅' ? fra_sta.svg :
                 features.properties.type === '仮貨物駅' ? fra_sta.svg :
                 features.properties.type === 'バス停' ? bus_sta.svg :
                 sta.svg;
-      return L.marker(latlng, {icon: sta});
+      return L.marker(latlng, {icon: sta.svg});
     },
     
     onEachFeature: (features, layer) => {
