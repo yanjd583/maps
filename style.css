@@ -17,6 +17,7 @@
     height: calc(tan(60deg) * 8px / 2);
     width: 60px;
     clip-path: polygon(50% 0, 100% 100%, 0 100%);
+    border: 2px solid black;
 }
 
 .rhombus {
@@ -141,4 +142,5 @@
   border: 10px solid black;
 
 }
+
 
