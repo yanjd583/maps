@@ -18,23 +18,32 @@
     width: 10px;
     clip-path: polygon(50% 0, 100% 100%, 0 100%);     
 }
-.triangle:before {
+.triangle:after {
     content: "";
     display: block;
     background: #ffffff;
     height: calc(tan(60deg) * 8px / 2);
     width: 8px;
-    top: 1px;
+    bottom: 1px;
     left: 1px;
     position: relative;
     clip-path: polygon(50% 0, 100% 100%, 0 100%);    
 }
 
 .rhombus {
-	width: 100px;
-	height: 100px;
+	width: 10px;
+	height: 10px;
 	transform: rotate(45deg);
-	background: #EF6C00;
+	background: #000000;
+}
+.rhombus:before {
+	width: 8px;
+	height: 8px;
+	transform: rotate(45deg);
+	background: #000000;
+  top: 1px;
+  left: 1px;
+  position: relative;
 }
 
 .pentagon {
