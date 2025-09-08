@@ -104,11 +104,6 @@ const elect = document.getElementById('Electrific');
 //    iconAnchor: [5, 5],
 //});
 var customIcon = L.divIcon({
-    className: 'triangle_outline',
-    //iconSize: [8, 8],
-    iconAnchor: [5, 6],
-});
-var customIcon2 = L.divIcon({
     className: 'triangle',
     //iconSize: [8, 8],
     iconAnchor: [5, 6],
@@ -206,9 +201,6 @@ function updateLayer() {
     },
     pointToLayer: function(features, latlng) {
       return L.marker(latlng, {icon: customIcon});
-    },
-    pointToLayer: function(features, latlng) {
-      return L.marker(latlng, {icon: customIcon2});
     },
     
     onEachFeature: (features, layer) => {

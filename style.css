@@ -16,9 +16,11 @@
     background: #ffffff;
     height: calc(tan(60deg) * 8px / 2);
     width: 8px;
-    clip-path: polygon(50% 0, 100% 100%, 0 100%);    
+    clip-path: polygon(50% 0, 100% 100%, 0 100%);     
 }
-.triangle_outline {
+.triangle:before {
+    content: "";
+    display: block;
     background: #000000;
     height: calc(tan(60deg) * 10px / 2);
     width: 10px;
