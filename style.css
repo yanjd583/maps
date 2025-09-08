@@ -1,4 +1,6 @@
 .circle {
+  width: 8px;
+  height: 8px;
     display: flex!important;
     justify-content: center;
     align-items: center;
@@ -14,9 +16,9 @@
     /*display: flex!important;
     justify-content: center;
     align-items: center;*/
+    border-bottom: 8px solid white;
     border-left: 4.62px solid transparent;
     border-right: 4.62px solid transparent;
-    border-bottom: 8px solid white;
     /*border: 2px solid #000000;*/
 }
 
