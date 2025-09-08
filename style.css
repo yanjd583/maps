@@ -14,9 +14,10 @@
 
 .triangle {
     background: #ffffff;
-    height: calc(tan(60deg) * 60px / 2);
+    height: calc(tan(60deg) * 8px / 2);
     width: 60px;
     clip-path: polygon(50% 0, 100% 100%, 0 100%);
+    border-radius: 50%;
     border: 2px solid black;
 }
 
