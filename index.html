@@ -192,7 +192,7 @@ function updateLayer() {
 
     style: (features) => {
 
-      if (owner.checked) {
+      if (features, latlng) {
         styleOptions.icon = features.properties.type === '信号場' ? sig_sta.svg :
                             features.properties.type === '仮信号場' ? sig_sta.svg :
                             features.properties.type === '貨物駅' ? fra_sta.svg :
@@ -201,7 +201,7 @@ function updateLayer() {
                             sta.svg;
       }
 
-      return styleOptions;
+      return L.marker(latlng, {icon: sta.svg});
     },
     //pointToLayer: function(features, latlng) {
     //  var staicon = features.properties.type === '信号場' ? sig_sta.svg :
