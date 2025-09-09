@@ -190,9 +190,6 @@ function updateLayer() {
       return features.properties.start_y <= thresh && features.properties.end_y >= thresh;
     },
     style: (features) => {
-      const styleOptions = {
-        weight: features.properties.line * 2
-      };
 
       if (owner.checked) {
         styleOptions.icon = features.properties.type === '信号場' ? sig_sta.svg :
