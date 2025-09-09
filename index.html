@@ -191,13 +191,13 @@ function updateLayer() {
     },
 
     pointToLayer: function(features, latlng) {
-      var staicon = features.properties.type === '信号場' ? sig :
-                    features.properties.type === '仮信号場' ? sig :
-                    features.properties.type === '貨物駅' ? fra :
-                    features.properties.type === '仮貨物駅' ? fra :
-                    features.properties.type === 'バス停' ? bus :
-                    sta;
-      return L.marker(latlng, {icon: staicon});
+      //var staicon = features.properties.type === '信号場' ? sig :
+      //              features.properties.type === '仮信号場' ? sig :
+      //              features.properties.type === '貨物駅' ? fra :
+      //              features.properties.type === '仮貨物駅' ? fra :
+      //              features.properties.type === 'バス停' ? bus :
+      //              sta;
+      return L.marker(latlng, {icon: sta});
     },
     
     onEachFeature: (features, layer) => {
