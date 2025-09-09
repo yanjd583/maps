@@ -189,10 +189,12 @@ function updateLayer() {
       if (!filterToggle.checked) return true;
       return features.properties.start_y <= thresh && features.properties.end_y >= thresh;
     },
-
     style: (features) => {
+      const styleOptions = {
+        weight: features.properties.line * 2
+      };
 
-      if (features, latlng) {
+      if (owner.checked) {
         styleOptions.icon = features.properties.type === '信号場' ? sig_sta.svg :
                             features.properties.type === '仮信号場' ? sig_sta.svg :
                             features.properties.type === '貨物駅' ? fra_sta.svg :
@@ -201,7 +203,7 @@ function updateLayer() {
                             sta.svg;
       }
 
-      return L.marker(latlng, {icon: sta.svg});
+      return styleOptions;
     },
     //pointToLayer: function(features, latlng) {
     //  var staicon = features.properties.type === '信号場' ? sig_sta.svg :
