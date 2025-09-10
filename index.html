@@ -4,7 +4,7 @@
 <head>
 <!-- wexal_pst_init.js does not exist -->
 <meta charset="utf-8">
-<title>Leaflet GeoJSON Filter GUI デモ</title>
+<title>日本鉄道変遷地図</title>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
 <link rel="stylesheet" href="style.css">
 <style>
@@ -29,6 +29,10 @@
 <div class="controls">
 <label>表示年: <span id="threshold-label">1950</span></label>
 <input type="range" id="threshold" min="1860" max="2100" value="1950">
+<label>月: <span id="month-label">1</span></label>
+<input type="range" id="month-va" min="1" max="12" value="1">
+<label>日: <span id="day-label">1</span></label>
+<input type="range" id="day-va" min="1" max="31" value="1">
 <label><input type="checkbox" id="filter-toggle" checked>時系列有効</label>
 <p><div class="eins"></div>単線（1線）</p>
 <p><div class="zwei"></div>複線（2線）</p>
@@ -88,6 +92,10 @@ let sta01original, rail01original;
 let sta01layer, rail01layer;
 const thresholdInput = document.getElementById('threshold');
 const thresholdLabel = document.getElementById('threshold-label');
+const monthInput = document.getElementById('month-va');
+const monthLabel = document.getElementById('month-label');
+const dayInput = document.getElementById('day-va');
+const dayLabel = document.getElementById('day-label');
 const filterToggle = document.getElementById('filter-toggle');
 const owner = document.getElementById('N05_001');
 const gauge_size = document.getElementById('gauge');
@@ -122,6 +130,10 @@ fetch('01_Sta_hokkaido.geojson')
 function updateLayer() {
   const thresh = +thresholdInput.value;
   thresholdLabel.textContent = thresh;
+  const thresh_m = +monthInput.value;
+  monthLabel.textContent = thresh_m;
+  const thresh_d = +dayInput.value;
+  dayLabel.textContent = thresh_d;
   if (rail01layer) {
     map.removeLayer(rail01layer);
   }
@@ -131,7 +143,12 @@ function updateLayer() {
   rail01layer = L.geoJSON(rail01original, {
     filter: features => {
       if (!filterToggle.checked) return true;
-      return features.properties.start_y <= thresh && features.properties.end_y >= thresh;
+      return features.properties.start_y <= thresh 
+          && features.properties.end_y > thresh 
+          && features.properties.start_m <= thresh_m 
+          && features.properties.end_m > thresh_m 
+          && features.properties.start_d <= thresh_d 
+          && features.properties.end_d > thresh_d;
     },
     //pointToLayer: function(features, latlng) {
     //  return L.marker(latlng, {icon: customIcon});
@@ -228,6 +245,8 @@ function init(){
 
   // GUIイベント
   thresholdInput.addEventListener('input', updateLayer);
+  monthInput.addEventListener('input', updateLayer);
+  dayInput.addEventListener('input', updateLayer);
   filterToggle.addEventListener('change', updateLayer);
 
 </script>
