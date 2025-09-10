@@ -143,8 +143,8 @@ function updateLayer() {
   rail01layer = L.geoJSON(rail01original, {
     filter: features => {
       if (!filterToggle.checked) return true;
-      year = features.properties.start_y < thresh && features.properties.end_y > thresh;
-      montha = features.properties.start_y === thresh && features.properties.start_m < thresh_m && features.properties.end_m > thresh_m;
+      year = (features.properties.start_y < thresh) && (features.properties.end_y > thresh);
+      montha = (features.properties.start_y === thresh) && (features.properties.start_m < thresh_m) && (features.properties.end_m > thresh_m);
       //monthb = features.properties.end_y === thresh && features.properties.start_m < thresh_m && features.properties.end_m > thresh_m;
       //daya = features.properties.start_y === thresh && features.properties.start_m === thresh_m && features.properties.start_d <= thresh_d && features.properties.end_m > thresh_d;
       //dayb = features.properties.end_y === thresh && features.properties.start_m === thresh_m && features.properties.start_d <= thresh_m && features.properties.end_m > thresh_d;
