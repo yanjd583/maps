@@ -144,13 +144,13 @@ function updateLayer() {
     filter: features => {
       if (!filterToggle.checked) return true;
       year = features.properties.start_y < thresh && features.properties.end_y > thresh;
-      montha = features.properties.start_y = thresh && features.properties.start_m < thresh_m && features.properties.end_m > thresh_m;
-      monthb = features.properties.end_y = thresh && features.properties.start_m < thresh_m && features.properties.end_m > thresh_m;
-      daya = features.properties.start_y === thresh && features.properties.start_m === thresh_m && features.properties.start_d <= thresh_d && features.properties.end_m > thresh_d;
-      dayb = features.properties.end_y === thresh && features.properties.start_m === thresh_m && features.properties.start_d <= thresh_m && features.properties.end_m > thresh_d;
-      dayc = features.properties.start_y === thresh && features.properties.end_m === thresh_m && features.properties.start_d <= thresh_m && features.properties.end_m > thresh_d;
-      dayd = features.properties.end_y === thresh && features.properties.end_m === thresh_m && features.properties.start_d <= thresh_m && features.properties.end_m > thresh_d;
-      return year && montha && monthb && daya && dayb && dayc && dayd;
+      //montha = features.properties.start_y = thresh && features.properties.start_m < thresh_m && features.properties.end_m > thresh_m;
+      //monthb = features.properties.end_y = thresh && features.properties.start_m < thresh_m && features.properties.end_m > thresh_m;
+      //daya = features.properties.start_y === thresh && features.properties.start_m === thresh_m && features.properties.start_d <= thresh_d && features.properties.end_m > thresh_d;
+      //dayb = features.properties.end_y === thresh && features.properties.start_m === thresh_m && features.properties.start_d <= thresh_m && features.properties.end_m > thresh_d;
+      //dayc = features.properties.start_y === thresh && features.properties.end_m === thresh_m && features.properties.start_d <= thresh_m && features.properties.end_m > thresh_d;
+      //dayd = features.properties.end_y === thresh && features.properties.end_m === thresh_m && features.properties.start_d <= thresh_m && features.properties.end_m > thresh_d;
+      return year //&& montha && monthb && daya && dayb && dayc && dayd;
     },
     //pointToLayer: function(features, latlng) {
     //  return L.marker(latlng, {icon: customIcon});
