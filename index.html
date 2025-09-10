@@ -29,9 +29,11 @@
 <div class="controls">
 <label>表示年: <span id="threshold-label">1950</span></label>
 <input type="range" id="threshold" min="1860" max="2100" value="1950">
+<!--
 <label>月: <span id="month-label">1</span></label>
 <input type="range" id="month-va" min="1" max="12" value="1">
 <label>日: <span id="day-label">1</span></label>
+-->
 <input type="range" id="day-va" min="1" max="31" value="1">
 <label><input type="checkbox" id="filter-toggle" checked>時系列有効</label>
 <p><div class="eins"></div>単線（1線）</p>
@@ -92,10 +94,10 @@ let sta01original, rail01original;
 let sta01layer, rail01layer;
 const thresholdInput = document.getElementById('threshold');
 const thresholdLabel = document.getElementById('threshold-label');
-const monthInput = document.getElementById('month-va');
-const monthLabel = document.getElementById('month-label');
-const dayInput = document.getElementById('day-va');
-const dayLabel = document.getElementById('day-label');
+//const monthInput = document.getElementById('month-va');
+//const monthLabel = document.getElementById('month-label');
+//const dayInput = document.getElementById('day-va');
+//const dayLabel = document.getElementById('day-label');
 const filterToggle = document.getElementById('filter-toggle');
 const owner = document.getElementById('N05_001');
 const gauge_size = document.getElementById('gauge');
@@ -130,10 +132,10 @@ fetch('01_Sta_hokkaido.geojson')
 function updateLayer() {
   const thresh = +thresholdInput.value;
   thresholdLabel.textContent = thresh;
-  const thresh_m = +monthInput.value;
-  monthLabel.textContent = thresh_m;
-  const thresh_d = +dayInput.value;
-  dayLabel.textContent = thresh_d;
+  //const thresh_m = +monthInput.value;
+  //monthLabel.textContent = thresh_m;
+  //const thresh_d = +dayInput.value;
+  //dayLabel.textContent = thresh_d;
   if (rail01layer) {
     map.removeLayer(rail01layer);
   }
@@ -143,14 +145,8 @@ function updateLayer() {
   rail01layer = L.geoJSON(rail01original, {
     filter: features => {
       if (!filterToggle.checked) return true;
-      //year = (features.properties.start_y < thresh) && (features.properties.end_y > thresh);
-      montha = (features.properties.start_y <= thresh) && (features.properties.start_y >= thresh) && (features.properties.start_m < thresh_m) && (features.properties.end_m > thresh_m);
-      //monthb = features.properties.end_y === thresh && features.properties.start_m < thresh_m && features.properties.end_m > thresh_m;
-      //daya = features.properties.start_y === thresh && features.properties.start_m === thresh_m && features.properties.start_d <= thresh_d && features.properties.end_m > thresh_d;
-      //dayb = features.properties.end_y === thresh && features.properties.start_m === thresh_m && features.properties.start_d <= thresh_m && features.properties.end_m > thresh_d;
-      //dayc = features.properties.start_y === thresh && features.properties.end_m === thresh_m && features.properties.start_d <= thresh_m && features.properties.end_m > thresh_d;
-      //dayd = features.properties.end_y === thresh && features.properties.end_m === thresh_m && features.properties.start_d <= thresh_m && features.properties.end_m > thresh_d;
-      return montha //&& monthb && daya && dayb && dayc && dayd;
+      year = (features.properties.start_y <= thresh) && (features.properties.end_y > thresh)
+      return year;
     },
     //pointToLayer: function(features, latlng) {
     //  return L.marker(latlng, {icon: customIcon});
