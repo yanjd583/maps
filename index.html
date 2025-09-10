@@ -200,7 +200,8 @@ function updateLayer() {
       return L.marker(latlng, {icon: staicon === "st" ? sta :
                                staicon === "ss" ? sig :
                                staicon === "fs" ? fre :
-                               staicon === "bs" ? bus});
+                               staicon === "bs" ? bus :
+                               sta});
     },
     
     onEachFeature: (features, layer) => {
