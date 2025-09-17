@@ -219,11 +219,13 @@ function updateLayer() {
                     features.properties.type === '仮貨物駅' ? "fs" :
                     features.properties.type === 'バス停' ? "bs" :
                     "st";
-      return L.marker(latlng, {icon: staicon === "st" ? L.icon({iconUrl: 'sta.svg', iconSize: [10, 10], html: features.properties.N05_011}) :
-                               staicon === "ss" ? L.icon({iconUrl: 'sig_sta.svg', iconSize: [11, 11], html: features.properties.N05_011}) :
-                               staicon === "fs" ? L.icon({iconUrl: 'fre_sta.svg', iconSize: [12, 12], html: features.properties.N05_011}) :
-                               staicon === "bs" ? L.icon({iconUrl: 'bus_sta.svg', iconSize: [11, 11], html: features.properties.N05_011}) :
-                               L.icon({iconUrl: 'sta.svg', iconSize: [10, 10], html: features.properties.N05_011})}
+      var staname = features.properties.N05_011;
+
+      return L.marker(latlng, {icon: staicon === "st" ? L.icon({iconUrl: 'sta.svg', iconSize: [10, 10], html: sta}) :
+                               staicon === "ss" ? L.icon({iconUrl: 'sig_sta.svg', iconSize: [11, 11], html: staname}) :
+                               staicon === "fs" ? L.icon({iconUrl: 'fre_sta.svg', iconSize: [12, 12], html: staname}) :
+                               staicon === "bs" ? L.icon({iconUrl: 'bus_sta.svg', iconSize: [11, 11], html: staname}) :
+                               L.icon({iconUrl: 'sta.svg', iconSize: [10, 10], html: staname})}
                               );
     },
 
