@@ -219,7 +219,7 @@ function updateLayer() {
                     features.properties.type === 'バス停' ? "bs" :
                     "st";
 
-      return L.marker(latlng, {icon: staicon === "st" ? sta :
+      return L.marker(latlng, {staicon: staicon === "st" ? sta :
                                staicon === "ss" ? sig :
                                staicon === "fs" ? frw :
                                staicon === "bs" ? bus :
