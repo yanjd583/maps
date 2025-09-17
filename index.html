@@ -221,11 +221,11 @@ function updateLayer() {
                     "st";
       var staname = features.properties.N05_011;
 
-      return L.marker(latlng, {icon: staicon === "st" ? L.divicon({iconSize: [10, 10], html: "<img src='sta.svg'><p>" + staname + "</p>"}) :
-                               staicon === "ss" ? L.divicon({iconUrl: 'sig_sta.svg', iconSize: [11, 11], html: "<p>" + staname + "</p>"}) :
-                               staicon === "fs" ? L.divicon({iconUrl: 'fre_sta.svg', iconSize: [12, 12], html: "<p>" + staname + "</p>"}) :
-                               staicon === "bs" ? L.divicon({iconUrl: 'bus_sta.svg', iconSize: [11, 11], html: "<p>" + staname + "</p>"}) :
-                               L.divicon({iconUrl: 'sta.svg', iconSize: [10, 10], html: "<p>" + staname + "</p>"})}
+      return L.marker(latlng, {icon: staicon === "st" ? sta :
+                               staicon === "ss" ? sig :
+                               staicon === "fs" ? frw :
+                               staicon === "bs" ? bus :
+                               sta }
                               );
     },
 
