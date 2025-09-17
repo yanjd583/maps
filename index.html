@@ -217,10 +217,10 @@ function updateLayer() {
                     features.properties.type === '仮貨物駅' ? "fs" :
                     features.properties.type === 'バス停' ? "bs" :
                     "st";
-      return L.marker(latlng, {icon: staicon === "st" ? sta :
-                               staicon === "ss" ? sig :
-                               staicon === "fs" ? fre :
-                               staicon === "bs" ? bus :
+      return L.marker(latlng, {icon: staicon === "st" ? sta (html= features.properties.N05_011) :
+                               staicon === "ss" ? sig (html= features.properties.N05_011):
+                               staicon === "fs" ? fre (html= features.properties.N05_011):
+                               staicon === "bs" ? bus (html= features.properties.N05_011):
                                sta});
     },
 
