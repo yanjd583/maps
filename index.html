@@ -219,7 +219,6 @@ function updateLayer() {
                     features.properties.type === '仮貨物駅' ? "fs" :
                     features.properties.type === 'バス停' ? "bs" :
                     "st";
-      var staname = features.properties.N05_011;
 
       return L.marker(latlng, {icon: staicon === "st" ? sta :
                                staicon === "ss" ? sig :
