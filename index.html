@@ -105,10 +105,12 @@ const owner = document.getElementById('N05_001');
 const gauge_size = document.getElementById('gauge');
 const elect = document.getElementById('Electrific');
 
+
 var sta = L.icon({iconUrl: 'sta.svg', iconSize: [10, 10]});
 var sig = L.icon({iconUrl: 'sig_sta.svg', iconSize: [11, 11]});
 var fre = L.icon({iconUrl: 'fre_sta.svg', iconSize: [12, 12]});
 var bus = L.icon({iconUrl: 'bus_sta.svg', iconSize: [11, 11]});
+
 
 
 // GeoJSONを読み込んで初期化
@@ -217,13 +219,17 @@ function updateLayer() {
                     features.properties.type === '仮貨物駅' ? "fs" :
                     features.properties.type === 'バス停' ? "bs" :
                     "st";
-      return L.marker(latlng, {icon: staicon === "st" ? sta (html= features.properties.N05_011) :
-                               staicon === "ss" ? sig (html= features.properties.N05_011):
-                               staicon === "fs" ? fre (html= features.properties.N05_011):
-                               staicon === "bs" ? bus (html= features.properties.N05_011):
-                               sta});
+      return L.marker(latlng, {icon: staicon === "st" ? L.icon({iconUrl: 'sta.svg', iconSize: [10, 10], html: features.properties.N05_011}) :
+                               staicon === "ss" ? L.icon({iconUrl: 'sig_sta.svg', iconSize: [11, 11], html: features.properties.N05_011}) :
+                               staicon === "fs" ? L.icon({iconUrl: 'fre_sta.svg', iconSize: [12, 12], html: features.properties.N05_011}) :
+                               staicon === "bs" ? L.icon({iconUrl: 'bus_sta.svg', iconSize: [11, 11], html: features.properties.N05_011}) :
+                               L.icon({iconUrl: 'sta.svg', iconSize: [10, 10], html: features.properties.N05_011})}
+                              );
     },
 
+
+
+    
     onEachFeature: (features, layer) => {
       layer.bindPopup(`駅名: ${features.properties.N05_011}<br>
       会社: ${features.properties.N05_003}<br>
