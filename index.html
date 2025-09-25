@@ -208,7 +208,7 @@ function updateLayer() {
                     features.properties.type === '仮貨物駅' ? "fs" :
                     features.properties.type === 'バス停' ? "bs" :
                     "st";
-      return L.marker(latlng, {icon: staicon === "st" ? L.divicon({html: '<img src="sta.svg" width ="10" height="10"><p>' + features.properties.N05_011 + '</p>', iconSize: [10, 10]}) :
+      return L.marker(latlng, {icon: staicon === "st" ? L.divicon({html: '<img src="sta.svg" width ="10" height="10"><p>aaa</p>', iconSize: [10, 10]}) :
                                      staicon === "bs" ? L.icon({iconUrl: 'bus_sta.svg', iconSize: [11, 11]}) :
                                      staicon === "ss" ? L.icon({iconUrl: 'sig_sta.svg', iconSize: [11, 11]}) :
                                      staicon === "fs" ? L.icon({iconUrl: 'fre_sta.svg', iconSize: [12, 12]}) :
