@@ -1,5 +1,12 @@
-.sta{
-	background-image: url("sta.svg")
+.sta{	/*�ʏ�w*/
+	width: 10px !important;
+	height: 10px !important;
+	margin-left: -8px !important;
+	margin-top: -8px !important;
+	background-color: #FFF;
+	border: solid 3px;
+	border-radius: 50%;
+	z-index: 1 !important;
 }
 
 .sig{
