@@ -220,7 +220,7 @@ function updateLayer() {
 //                                     L.icon({iconUrl: 'sta.svg', iconSize: [10, 10]
 //                              , html: features.properties.N05_011}) 
       
-      return L.marker(latlng, {icon: staicon === "st" ? L.divicon({html: '<p>' + feature.properties.N05_011 + '</p>', iconSize: [10, 10], className: "sta"}) :
+      return L.marker(latlng, {icon: staicon === "st" ? L.divicon({html: '<div class="icontext">' + feature.properties.N05_011 + '</div>', iconSize: [10, 10], className: "sta"}) :
                                      staicon === "bs" ? L.icon({iconUrl: 'bus_sta.svg', iconSize: [11, 11]}) :
                                      staicon === "ss" ? L.icon({iconUrl: 'sig_sta.svg', iconSize: [11, 11]}) :
                                      staicon === "fs" ? L.icon({iconUrl: 'fre_sta.svg', iconSize: [12, 12]}) :
@@ -261,6 +261,7 @@ function init(){
     
 </body>
 </html>
+
 
 
 
