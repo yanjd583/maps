@@ -83,12 +83,12 @@
 <script src="01_Hokkaido.js"></script>
 
 <script>
-  const map = L.map('map', { zoomSnap: 0.1 })
-      .setView([43.0619, 141.3544], 10);
+const map = L.map('map', { zoomSnap: 0.1 })
+    .setView([43.0619, 141.3544], 10);
 
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '© OpenStreetMap contributors'
-    }).addTo(map);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© OpenStreetMap contributors'
+  }).addTo(map);
 
 
 let sta01original, rail01original, sta_name01original;
@@ -244,19 +244,21 @@ function updateLayer() {
     
   }).addTo(map);
 
-  sta_name01layer = L.geoJSON(sta_name01original, {
-    filter: features => {
-      if (!filterToggle.checked) return true;
-      return features.properties.start_y <= thresh && features.properties.end_y > thresh;
-    },
-      
-    pointToLayer: function(features, latlng) {
-      return L.marker(latlng, {icon: L.divIcon({html: '<div class="icontext">aaa</div>', 
-                                               iconSize: [0, 0]
-                                               }) 
-                     });
-    }    
-  }).addTo(map);
+
+  if (map.getZoom() >8){
+    sta_name01layer = L.geoJSON(sta_name01original, {
+      filter: features => {
+        if (!filterToggle.checked) return true;
+        return features.properties.start_y <= thresh && features.properties.end_y > thresh;
+      },      
+      pointToLayer: function(features, latlng) {
+        return L.marker(latlng, {icon: L.divIcon({html: '<div class="icontext">aaa</div>', 
+                                                 iconSize: [0, 0]
+                                                 }) 
+                       });
+      }    
+    }).addTo(map);
+  }
 
 }
 
@@ -280,6 +282,7 @@ function init(){
     
 </body>
 </html>
+
 
 
 
