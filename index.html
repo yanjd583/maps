@@ -83,7 +83,7 @@
 <script src="01_Hokkaido.js"></script>
 
 <script>
-  const map = L.map('map', { zoomControl: false })
+  const map = L.map('map', { zoomSnap: 0.1 })
       .setView([43.0619, 141.3544], 10);
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -280,6 +280,7 @@ function init(){
     
 </body>
 </html>
+
 
 
 
