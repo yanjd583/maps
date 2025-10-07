@@ -261,7 +261,19 @@ function updateLayer() {
         };
     }
     
-  }).addTo(map);
+  }).bindPopup(function (layer) {
+				const properties = layer.feature.properties;
+				let html = '';
+				const keys = Object.keys(properties).filter(function (key) {
+					return key !== 'geometry' && key !== 'name' && key.charAt(0) !== '_';
+				});
+				if (keys.length > 0) {
+					html += '<table><tbody>' + keys.map(function (key) {
+						return '<tr><td>' + properties[key] + '</td></tr>';
+					}).join('') + '</tbody></table>';
+				}
+				return html;
+			});
 
 }
 
@@ -285,6 +297,7 @@ function init(){
     
 </body>
 </html>
+
 
 
 
