@@ -249,9 +249,9 @@ function updateLayer() {
       if (!filterToggle.checked) return true;
       return features.properties.start_y <= thresh && features.properties.end_y > thresh;
     },
-
+      
     pointToLayer: function(features, latlng) {
-      return L.marker(latlng, {icon: L.divIcon({html: '<div class="icontext">' + feature.properties.N05_011 + '</div>', 
+      return L.marker(latlng, {icon: L.divIcon({html: '<p>' + feature.properties.N05_011 + '</p>', 
                                                iconSize: [0, 0]}) 
                      });
     },
@@ -285,6 +285,7 @@ function init(){
     
 </body>
 </html>
+
 
 
 
