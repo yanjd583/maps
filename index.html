@@ -245,18 +245,18 @@ function updateLayer() {
   }).addTo(map);
 
 
-  sta_name01layer = L.geoJSON(sta_name01original, {
-    filter: features => {
-      if (!filterToggle.checked) return true;
-      return features.properties.start_y <= thresh && features.properties.end_y >= thresh;
-    },
+//  sta_name01layer = L.geoJSON(sta_name01original, {
+//    filter: features => {
+//      if (!filterToggle.checked) return true;
+//      return features.properties.start_y <= thresh && features.properties.end_y >= thresh;
+//    },
 
-    pointToLayer: function(features, latlng) {     
-      return L.marker(latlng, {icon: L.divicon({html: '<div class="icontext">' + feature.properties.N05_011 + '</div>', iconSize: [10, 10], className: "sta"})
-                     });
-    },
+//    pointToLayer: function(features, latlng) {     
+//      return L.marker(latlng, {icon: L.divicon({html: '<div class="icontext">' + feature.properties.N05_011 + '</div>', iconSize: [10, 10], className: "sta"})
+//                     });
+//    },
     
-  }).addTo(map);
+//  }).addTo(map);
 
     
 
@@ -281,6 +281,7 @@ function init(){
     
 </body>
 </html>
+
 
 
 
