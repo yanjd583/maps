@@ -253,11 +253,12 @@ function updateLayer() {
       },      
       pointToLayer: function(features, latlng) {
         return L.marker(latlng, {icon: L.divIcon({html: '<div class="icontext">aaa</div>', 
-                                                 iconSize: [0, 0]
-                                                 }) 
+                                                 iconSize: [0, 0]}) 
                        });
       }    
     }).addTo(map);
+  } else {
+	map.removeLayer(sta_name01layer);
   }
 
 }
@@ -282,6 +283,7 @@ function init(){
     
 </body>
 </html>
+
 
 
 
