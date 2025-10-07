@@ -92,8 +92,8 @@
     }).addTo(map);
 
 
-let sta01original, rail01original;
-let sta01layer, rail01layer;
+let sta01original, rail01original, sta_name01layer;
+let sta01layer, rail01layer, sta_name01layer;
 const thresholdInput = document.getElementById('threshold');
 const thresholdLabel = document.getElementById('threshold-label');
 //const monthInput = document.getElementById('month-va');
@@ -126,6 +126,15 @@ fetch('01_Sta_hokkaido.geojson')
   })
   .catch(erro => console.error('GeoJSON 読み込みエラー:', err));
 
+    
+fetch('01_Sta_hokkaido.geojson')
+  .then(res => res.json())
+  .then(data => {
+    sta_name01original = data;
+    updateLayer();
+  })
+  .catch(erro => console.error('GeoJSON 読み込みエラー:', err));
+
 // レイヤ更新関数
 function updateLayer() {
   const thresh = +thresholdInput.value;
@@ -139,6 +148,9 @@ function updateLayer() {
   }
   if (sta01layer) {
     map.removeLayer(sta01layer);
+  }
+  if (sta_name01layer) {
+    map.removeLayer(sta_name01layer);
   }
   rail01layer = L.geoJSON(rail01original, {
     filter: features => {
@@ -213,20 +225,12 @@ function updateLayer() {
                     features.properties.type === 'バス停' ? "bs" :
                     "st";
       
-//      return L.marker(latlng, {icon: staicon === "st" ? L.icon({iconUrl: 'sta.svg', iconSize: [10, 10]}) :
-//                                     staicon === "bs" ? L.icon({iconUrl: 'bus_sta.svg', iconSize: [11, 11]}) :
-//                                     staicon === "ss" ? L.icon({iconUrl: 'sig_sta.svg', iconSize: [11, 11]}) :
-//                                     staicon === "fs" ? L.icon({iconUrl: 'fre_sta.svg', iconSize: [12, 12]}) :
-//                                     L.icon({iconUrl: 'sta.svg', iconSize: [10, 10]
-//                              , html: features.properties.N05_011}) 
-      
-      return L.marker(latlng, {icon: staicon === "st" ? L.divicon({html: '<div class="icontext">' + feature.properties.N05_011 + '</div>', iconSize: [10, 10], className: "sta"}) :
+      return L.marker(latlng, {icon: staicon === "st" ? L.icon({iconUrl: 'sta.svg', iconSize: [10, 10]}) :
                                      staicon === "bs" ? L.icon({iconUrl: 'bus_sta.svg', iconSize: [11, 11]}) :
                                      staicon === "ss" ? L.icon({iconUrl: 'sig_sta.svg', iconSize: [11, 11]}) :
                                      staicon === "fs" ? L.icon({iconUrl: 'fre_sta.svg', iconSize: [12, 12]}) :
-                                     L.icon({iconUrl: 'sta.svg', iconSize: [10, 10]
-                              , html: features.properties.N05_011}) 
-                     });
+                                     L.icon({iconUrl: 'sta.svg', iconSize: [10, 10]}) 
+                           });
     },
     
     onEachFeature: (features, layer) => {
@@ -239,6 +243,22 @@ function updateLayer() {
     }
     
   }).addTo(map);
+
+
+  sta_name01layer = L.geoJSON(sta_name01original, {
+    filter: features => {
+      if (!filterToggle.checked) return true;
+      return features.properties.start_y <= thresh && features.properties.end_y >= thresh;
+    },
+
+    pointToLayer: function(features, latlng) {     
+      return L.marker(latlng, {icon: L.divicon({html: '<div class="icontext">' + feature.properties.N05_011 + '</div>', iconSize: [10, 10], className: "sta"})
+                     });
+    },
+    
+  }).addTo(map);
+
+    
 
 }
 
@@ -261,6 +281,7 @@ function init(){
     
 </body>
 </html>
+
 
 
 
