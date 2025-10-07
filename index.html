@@ -127,13 +127,13 @@ fetch('01_Sta_hokkaido.geojson')
   .catch(erro => console.error('GeoJSON 読み込みエラー:', err));
 
     
-fetch('01_Sta_hokkaido.geojson')
-  .then(res => res.json())
-  .then(data => {
-    sta_name01original = data;
-    updateLayer();
-  })
-  .catch(erro => console.error('GeoJSON 読み込みエラー:', err));
+//fetch('01_Sta_hokkaido.geojson')
+//  .then(res => res.json())
+//  .then(data => {
+//    sta_name01original = data;
+//    updateLayer();
+//  })
+//  .catch(erro => console.error('GeoJSON 読み込みエラー:', err));
 
 // レイヤ更新関数
 function updateLayer() {
@@ -149,9 +149,9 @@ function updateLayer() {
   if (sta01layer) {
     map.removeLayer(sta01layer);
   }
-  if (sta_name01layer) {
-    map.removeLayer(sta_name01layer);
-  }
+//  if (sta_name01layer) {
+//    map.removeLayer(sta_name01layer);
+//  }
   rail01layer = L.geoJSON(rail01original, {
     filter: features => {
       if (!filterToggle.checked) return true;
@@ -281,6 +281,7 @@ function init(){
     
 </body>
 </html>
+
 
 
 
