@@ -243,7 +243,7 @@ function updateLayer() {
     }
     
   }).addTo(map);
-    
+
   sta_name01layer = L.geoJSON(sta_name01original, {
     filter: features => {
       if (!filterToggle.checked) return true;
@@ -256,22 +256,25 @@ function updateLayer() {
                                                }) 
                      });
     }    
-  }),
-				style: function (feature) {
-					return {
-						weight: 0,
-					};
-				}.addTo(map);
+  }).addTo(map);
 
 }
 
 function init(){
-    var overlay = {
-        "rail": rail01layer,
-        "station": sta01layer,
-        "staname": sta_name01layer
-    }
-    L.control.layers(null, overlay).addTo(map);
+	if (map.getZoom() >8){		
+	    var overlay = {
+    	    "rail": rail01layer,
+        	"station": sta01layer,
+		    "staname": sta_name01layer
+    	}
+    	L.control.layers(null, overlay).addTo(map);
+	} else {	
+	    var overlay = {
+    	    "rail": rail01layer,
+        	"station": sta01layer,
+    	}
+    	L.control.layers(null, overlay).addTo(map);
+	}
 }
     
 
@@ -285,6 +288,7 @@ function init(){
     
 </body>
 </html>
+
 
 
 
