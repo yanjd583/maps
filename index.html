@@ -252,19 +252,7 @@ function updateLayer() {
         return features.properties.start_y <= thresh && features.properties.end_y > thresh;
       },
       pointToLayer: function(features, latlng) {
-		var staicon = features.properties.type === '信号場' ? "ss" :
-                      features.properties.type === '仮信号場' ? "ss" :
-                      features.properties.type === '貨物駅' ? "fs" :
-                      features.properties.type === '仮貨物駅' ? "fs" :
-                      features.properties.type === 'バス停' ? "bs" :
-                      "st";
-
-		return L.marker(latlng, {icon: staicon === "st" ? L.divIcon({html: '<div class="icontext">' + features.properties.N05_011 + '</div>', iconSize: [0, 0], classname: sta}) :
-                                       staicon === "bs" ? L.divIcon({html: '<div class="icontext">' + features.properties.N05_011 + '</div>', iconSize: [0, 0], classname: bus}) :
-                                       staicon === "ss" ? L.divIcon({html: '<div class="icontext">' + features.properties.N05_011 + '</div>', iconSize: [0, 0], classname: sig}) :
-                                       staicon === "fs" ? L.divIcon({html: '<div class="icontext">' + features.properties.N05_011 + '</div>', iconSize: [0, 0], classname: fre}) :
-                                       L.divIcon({html: '<div class="icontext">' + features.properties.N05_011 + '</div>', iconSize: [0, 0], classname: sta}) 
-        //return L.marker(latlng, {icon: L.divIcon({html: '<div class="icontext">' + features.properties.N05_011 + '</div>', iconSize: [0, 0]}) 
+		return L.marker(latlng, {icon: L.divIcon({html: '<div class="icontext">' + features.properties.N05_011 + '</div>', iconSize: [0, 0]}) 
                        });
       }    
     }).addTo(map);
@@ -294,6 +282,7 @@ function init(){
     
 </body>
 </html>
+
 
 
 
