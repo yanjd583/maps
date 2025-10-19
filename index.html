@@ -219,8 +219,6 @@ function updateLayer() {
     filter: features => {
       if (!TIMEfilterToggle.checked) return true{
         return features.properties.start_y <= thresh && features.properties.end_y > thresh;
-	  } else if (!ICONfilterToggle.checked) return true{
-	    return ;	
 	  }
     },
 
@@ -257,8 +255,6 @@ function updateLayer() {
     filter: features => {
       if (!TIMEfilterToggle.checked) return true{
         return features.properties.start_y <= thresh && features.properties.end_y > thresh; 
-	  } else if (!NAMEfilterToggle.checked) return true{
-        return ;	
 	  }
     },
     pointToLayer: function(features, latlng) {
@@ -292,6 +288,7 @@ function init(){
     
 </body>
 </html>
+
 
 
 
