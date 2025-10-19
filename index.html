@@ -250,12 +250,12 @@ function updateLayer() {
   if (map.getZoom() >8){
     sta_name01layer = L.geoJSON(sta_name01original, {
       filter: features => {
+		    if (!NAMEfilterToggle.checked) return true;
+         const noname = features.properties.start_y < 1000;
+         return noname;
         if (!TIMEfilterToggle.checked) return true;
          const station_name = features.properties.start_y <= thresh && features.properties.end_y > thresh;
          return station_name;
-		    if (!NAMEfilterToggle.checked) return station_name;
-         const noname = features.properties.start_y < 1000;
-         return noname;
       },
       pointToLayer: function(features, latlng) {
 		return L.marker(latlng, {icon: L.divIcon({html: '<div class="icontext">' + features.properties.N05_011 + '</div>', iconSize: [0, 0]}) 
