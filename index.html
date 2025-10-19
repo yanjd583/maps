@@ -159,9 +159,11 @@ function updateLayer() {
     filter: features => {
       if (!TIMEfilterToggle.checked) return true;
       year = (features.properties.start_y < thresh) && (features.properties.end_y > thresh)
-      month = (features.properties.start_y == thresh) && (features.properties.start_m < thresh_m) && (features.properties.end_m > thresh_m)
-      day = ((features.properties.start_m == thresh_m) && features.properties.start_d <= thresh_d) && (features.properties.end_d > thresh_d)
-      return year || month || day;
+      s_month = (features.properties.start_y == thresh) && (features.properties.start_m < thresh_m)
+      s_day = (features.properties.start_m == thresh_m) && (features.properties.start_d <= thresh_d)
+      e_month = (features.properties.end_y == thresh) && (features.properties.end_m > thresh_m)
+      e_day = (features.properties.end_m == thresh_m) && (features.properties.end_d > thresh_d)
+      return year || s_month || s_day || e_month || e_day;
     },
     //pointToLayer: function(features, latlng) {
     //  return L.marker(latlng, {icon: customIcon});
@@ -288,7 +290,6 @@ function init(){
     
 </body>
 </html>
-
 
 
 
