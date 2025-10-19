@@ -219,7 +219,7 @@ function updateLayer() {
       if (!TIMEfilterToggle.checked) return true{
         return features.properties.start_y <= thresh && features.properties.end_y > thresh;
 	  }else if (!ICONfilterToggle.checked) return false{
-	    return features.properties.start_y <= 100;	
+	    return ;	
 	  }
     },
 
@@ -257,7 +257,7 @@ function updateLayer() {
       if (!TIMEfilterToggle.checked) return true{
         return features.properties.start_y <= thresh && features.properties.end_y > thresh; 
 	  } else if (!NAMEfilterToggle.checked) return false{
-        return features.properties.start_y <= 100;	
+        return ;	
 	  }
     },
     pointToLayer: function(features, latlng) {
@@ -291,6 +291,7 @@ function init(){
     
 </body>
 </html>
+
 
 
 
