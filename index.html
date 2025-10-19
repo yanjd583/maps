@@ -35,6 +35,7 @@
 <input type="range" id="day-va" min="1" max="31" value="1">
 -->
 <label><input type="checkbox" id="time-filter-toggle" checked>時系列有効</label>
+<label><input type="checkbox" id="name-filter-toggle">駅名削除</label>
 <p><div class="eins"></div>単線（1線）</p>
 <p><div class="zwei"></div>複線（2線）</p>
 <p><div class="drei"></div>三線（3線）</p>
@@ -100,6 +101,7 @@ const thresholdLabel = document.getElementById('threshold-label');
 //const dayInput = document.getElementById('day-va');
 //const dayLabel = document.getElementById('day-label');
 const TIMEfilterToggle = document.getElementById('time-filter-toggle');
+const NAMEfilterToggle = document.getElementById('name-filter-toggle');
 const owner = document.getElementById('N05_001');
 const gauge_size = document.getElementById('gauge');
 const elect = document.getElementById('Electrific');
@@ -249,7 +251,9 @@ function updateLayer() {
     sta_name01layer = L.geoJSON(sta_name01original, {
       filter: features => {
         if (!TIMEfilterToggle.checked) return true;
-        return features.properties.start_y <= thresh && features.properties.end_y > thresh;
+         return features.properties.start_y <= thresh && features.properties.end_y > thresh;
+		else if (!NAMEfilterToggle.checked) return true;
+         return features.properties.start_y <= 100;
       },
       pointToLayer: function(features, latlng) {
 		return L.marker(latlng, {icon: L.divIcon({html: '<div class="icontext">' + features.properties.N05_011 + '</div>', iconSize: [0, 0]}) 
@@ -277,11 +281,13 @@ function init(){
   monthInput.addEventListener('input', updateLayer);
   dayInput.addEventListener('input', updateLayer);
   TIMEfilterToggle.addEventListener('change', updateLayer);
+  NAMEfilterToggle.addEventListener('change', updateLayer);
 
 </script>
     
 </body>
 </html>
+
 
 
 
