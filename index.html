@@ -218,7 +218,7 @@ function updateLayer() {
     filter: features => {
       if (!TIMEfilterToggle.checked) return true{
         return features.properties.start_y <= thresh && features.properties.end_y > thresh;
-	  }else if (!ICONfilterToggle.checked) return false;{
+	  }else if (!ICONfilterToggle.checked) return false{
 	    return features.properties.start_y <= 100;	
 	  }
     },
@@ -291,6 +291,7 @@ function init(){
     
 </body>
 </html>
+
 
 
 
