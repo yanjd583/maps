@@ -157,9 +157,10 @@ function updateLayer() {
   }
   rail01layer = L.geoJSON(rail01original, {
     filter: features => {
-      if (!TIMEfilterToggle.checked) return true;
-      year = (features.properties.start_y <= thresh) && (features.properties.end_y > thresh)
+      if (!TIMEfilterToggle.checked) return true{
+      year = (features.properties.start_y <= thresh) && (features.properties.end_y > thresh);
       return year;
+	  }
     },
     //pointToLayer: function(features, latlng) {
     //  return L.marker(latlng, {icon: customIcon});
@@ -218,7 +219,7 @@ function updateLayer() {
     filter: features => {
       if (!TIMEfilterToggle.checked) return true{
         return features.properties.start_y <= thresh && features.properties.end_y > thresh;
-	  }else if (!ICONfilterToggle.checked) return false{
+	  } else if (!ICONfilterToggle.checked) return true{
 	    return ;	
 	  }
     },
@@ -256,7 +257,7 @@ function updateLayer() {
     filter: features => {
       if (!TIMEfilterToggle.checked) return true{
         return features.properties.start_y <= thresh && features.properties.end_y > thresh; 
-	  } else if (!NAMEfilterToggle.checked) return false{
+	  } else if (!NAMEfilterToggle.checked) return true{
         return ;	
 	  }
     },
@@ -291,6 +292,7 @@ function init(){
     
 </body>
 </html>
+
 
 
 
