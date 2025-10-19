@@ -161,7 +161,7 @@ function updateLayer() {
       year = (features.properties.start_y < thresh) && (features.properties.end_y > thresh)
       month = (features.properties.start_y == thresh) && (features.properties.start_m < thresh_m) && (features.properties.end_m > thresh_m)
       day = ((features.properties.start_m == thresh_m) && features.properties.start_d <= thresh_d) && (features.properties.end_d > thresh_d)
-      return year||& month || day;
+      return year || month || day;
     },
     //pointToLayer: function(features, latlng) {
     //  return L.marker(latlng, {icon: customIcon});
@@ -288,6 +288,7 @@ function init(){
     
 </body>
 </html>
+
 
 
 
