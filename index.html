@@ -275,7 +275,7 @@ function updateLayer() {
     },
     pointToLayer: function(features, latlng) {
 	return L.marker(latlng, {icon: L.divIcon({html: '<div class="icontext">' + features.properties.N05_011 + '</div>', iconSize: [0, 0]}) 
-                     });
+                     , opacity: 0});
     }    
   }).addTo(map);
 
@@ -303,6 +303,7 @@ function init(){
     
 </body>
 </html>
+
 
 
 
