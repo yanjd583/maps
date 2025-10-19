@@ -6,5 +6,13 @@ document.addEventListener('DOMContentLoaded', function() {
       document.getElementById('uuu').style.display = this.value === '3' ? 'block' : 'none';
     });
   });
-
 });
+
+function botan() {
+  const lineFigure = document.getElementById('line_figure');
+  if (lineFigure.style.display === 'none') {
+    lineFigure.style.display = 'block';
+  } else {
+    lineFigure.style.display = 'none';
+  }
+}
