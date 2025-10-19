@@ -251,9 +251,11 @@ function updateLayer() {
     sta_name01layer = L.geoJSON(sta_name01original, {
       filter: features => {
         if (!TIMEfilterToggle.checked) return true;
-         return features.properties.start_y <= thresh && features.properties.end_y > thresh;
+         station_name = features.properties.start_y <= thresh && features.properties.end_y > thresh;
+         return station_name;
 		    if (!NAMEfilterToggle.checked) return true;
-         return features.properties.start_y < 1000;
+         noname = features.properties.start_y < 1000;
+         return noname;
       },
       pointToLayer: function(features, latlng) {
 		return L.marker(latlng, {icon: L.divIcon({html: '<div class="icontext">' + features.properties.N05_011 + '</div>', iconSize: [0, 0]}) 
