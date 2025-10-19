@@ -24,8 +24,8 @@
 
 .icontext {	
 	position: fixed;
-	right: 5px;
-	top: -8px;
+	right: 10px;
+	top: -10px;
 	font-size: 16px;
 	font-weight: bold;
 	text-align: right;
@@ -37,7 +37,7 @@
 	box-shadow: 0 1px 3px rgba(0,0,0,0.4);
 	z-index: 3;
 }
-
+/*
 .icontext::before{
 	content: '';
 	position: fixed;
@@ -50,7 +50,7 @@
 	border-top: 10px solid transparent;
 	border-bottom: 10px solid transparent;
 }
-
+*/
 
 
 
@@ -164,6 +164,7 @@
   border: 10px solid black;
 
 }
+
 
 
 
