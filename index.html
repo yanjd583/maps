@@ -214,9 +214,10 @@ function updateLayer() {
       路線: ${features.properties.N05_002}<br>
       軌間: ${features.properties.gauge}<br>
       電化: ${features.properties.Electrific}<br>
-      開: ${features.properties.start_org}<br>
-      自: ${features.properties.start}<br>
-      至: ${features.properties.end}`);
+      開業: ${features.properties.start_org} ± ${features.properties.startorg_sup}日<br>
+      自: ${features.properties.start} ± ${features.properties.start_sup}日<br>
+      至: ${features.properties.end} ± ${features.properties.end_sup}日<br>
+      廃止: ${features.properties.end_org} ± ${features.properties.endorg_sup}日`);
     }
     
   }).addTo(map);
@@ -254,9 +255,10 @@ function updateLayer() {
       layer.bindPopup(`駅名:<b> ${features.properties.N05_011}</b><br>
       会社: ${features.properties.N05_003}<br>
       路線: ${features.properties.N05_002}<br>
-      開: ${features.properties.start_org}<br>
-      自: ${features.properties.start}<br>
-      至: ${features.properties.end}`);
+      開業: ${features.properties.start_org} ± ${features.properties.startorg_sup}日<br>
+      自: ${features.properties.start} ± ${features.properties.start_sup}日<br>
+      至: ${features.properties.end} ± ${features.properties.end_sup}日<br>
+      廃止: ${features.properties.end_org} ± ${features.properties.endorg_sup}日`);
     }
     
   }).addTo(map);
@@ -303,6 +305,7 @@ function init(){
     
 </body>
 </html>
+
 
 
 
