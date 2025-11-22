@@ -224,6 +224,7 @@ function updateLayer() {
 
   sta01layer = L.geoJSON(sta01original, {
     filter: features => {
+	  if (!ICONfilterToggle.checked) return false;
       if (!TIMEfilterToggle.checked) return true;
       year = (features.properties.year_sta < thresh) && (features.properties.year_end > thresh)
       s_month = (features.properties.year_sta == thresh) && (features.properties.mon_sta < thresh_m)
@@ -305,6 +306,7 @@ function init(){
     
 </body>
 </html>
+
 
 
 
