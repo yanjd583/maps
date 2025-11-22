@@ -238,8 +238,10 @@ function updateLayer() {
     pointToLayer: function(features, latlng) {
       var staicon = features.properties.type === '信号場' ? "ss" :
                     features.properties.type === '仮信号場' ? "ss" :
+                    features.properties.type === '臨時信号場' ? "ss" :
                     features.properties.type === '貨物駅' ? "fs" :
                     features.properties.type === '仮貨物駅' ? "fs" :
+                    features.properties.type === '操車場' ? "fs" :
                     features.properties.type === 'バス停' ? "bs" :
                     "st";
       
@@ -306,6 +308,7 @@ function init(){
     
 </body>
 </html>
+
 
 
 
