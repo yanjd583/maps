@@ -161,11 +161,11 @@ function updateLayer() {
   rail01layer = L.geoJSON(rail01original, {
     filter: features => {
       if (!TIMEfilterToggle.checked) return true;
-      year = (features.properties.start_y < thresh) && (features.properties.end_y > thresh)
-      s_month = (features.properties.start_y == thresh) && (features.properties.start_m < thresh_m)
-      s_day = (features.properties.start_y == thresh) && (features.properties.start_m == thresh_m) && (features.properties.start_d <= thresh_d)
-      e_month = (features.properties.end_y == thresh) && (features.properties.end_m > thresh_m)
-      e_day = (features.properties.end_y == thresh) && (features.properties.end_m == thresh_m) && (features.properties.end_d > thresh_d)
+      year = (features.properties.year_sta < thresh) && (features.properties.year_end > thresh)
+      s_month = (features.properties.year_sta == thresh) && (features.properties.mon_sta < thresh_m)
+      s_day = (features.properties.year_sta == thresh) && (features.properties.mon_sta == thresh_m) && (features.properties.day_sta <= thresh_d)
+      e_month = (features.properties.year_end == thresh) && (features.properties.mon_end > thresh_m)
+      e_day = (features.properties.year_end == thresh) && (features.properties.mon_end == thresh_m) && (features.properties.day_end > thresh_d)
       return year || s_month || s_day || e_month || e_day;
     },
     //pointToLayer: function(features, latlng) {
@@ -214,24 +214,24 @@ function updateLayer() {
       路線: ${features.properties.N05_002}<br>
       軌間: ${features.properties.gauge}<br>
       電化: ${features.properties.Electrific}<br>
-      開業: ${features.properties.start_org} ± ${features.properties.startorg_sup}日<br>
-      自: ${features.properties.start} ± ${features.properties.start_sup}日<br>
-      至: ${features.properties.end} ± ${features.properties.end_sup}日<br>
-      廃止: ${features.properties.end_org} ± ${features.properties.endorg_sup}日`);
+      開業: ${features.properties.start_org} ± ${features.properties.staorg_s}日<br>
+      自: ${features.properties.start} ± ${features.properties.start_s}日<br>
+      至: ${features.properties.end} ± ${features.properties.end_s}日<br>
+      廃止: ${features.properties.end_org} ± ${features.properties.endorg_s}日`);
     }
     
   }).addTo(map);
 
   sta01layer = L.geoJSON(sta01original, {
     filter: features => {
-		  if (!ICONfilterToggle.checked) return false;
       if (!TIMEfilterToggle.checked) return true;
-      year = (features.properties.start_y < thresh) && (features.properties.end_y > thresh)
-      s_month = (features.properties.start_y == thresh) && (features.properties.start_m < thresh_m)
-      s_day = (features.properties.start_y == thresh) && (features.properties.start_m == thresh_m) && (features.properties.start_d <= thresh_d)
-      e_month = (features.properties.end_y == thresh) && (features.properties.end_m > thresh_m)
-      e_day = (features.properties.end_y == thresh) && (features.properties.end_m == thresh_m) && (features.properties.end_d > thresh_d)
+      year = (features.properties.year_sta < thresh) && (features.properties.year_end > thresh)
+      s_month = (features.properties.year_sta == thresh) && (features.properties.mon_sta < thresh_m)
+      s_day = (features.properties.year_sta == thresh) && (features.properties.mon_sta == thresh_m) && (features.properties.day_sta <= thresh_d)
+      e_month = (features.properties.year_end == thresh) && (features.properties.mon_end > thresh_m)
+      e_day = (features.properties.year_end == thresh) && (features.properties.mon_end == thresh_m) && (features.properties.day_end > thresh_d)
       return year || s_month || s_day || e_month || e_day;
+		  if (!ICONfilterToggle.checked) return false;
     },
     
     pointToLayer: function(features, latlng) {
@@ -255,10 +255,10 @@ function updateLayer() {
       layer.bindPopup(`駅名:<b> ${features.properties.N05_011}</b><br>
       会社: ${features.properties.N05_003}<br>
       路線: ${features.properties.N05_002}<br>
-      開業: ${features.properties.start_org} ± ${features.properties.startorg_sup}日<br>
-      自: ${features.properties.start} ± ${features.properties.start_sup}日<br>
-      至: ${features.properties.end} ± ${features.properties.end_sup}日<br>
-      廃止: ${features.properties.end_org} ± ${features.properties.endorg_sup}日`);
+      開業: ${features.properties.start_org} ± ${features.properties.staorg_s}日<br>
+      自: ${features.properties.start} ± ${features.properties.start_s}日<br>
+      至: ${features.properties.end} ± ${features.properties.end_s}日<br>
+      廃止: ${features.properties.end_org} ± ${features.properties.endorg_s}日`);
     }
     
   }).addTo(map);
@@ -268,11 +268,11 @@ function updateLayer() {
     filter: features => {
 	    if (!NAMEfilterToggle.checked) return false;
       if (!TIMEfilterToggle.checked) return true;
-      year = (features.properties.start_y < thresh) && (features.properties.end_y > thresh)
-      s_month = (features.properties.start_y == thresh) && (features.properties.start_m < thresh_m)
-      s_day = (features.properties.start_y == thresh) && (features.properties.start_m == thresh_m) && (features.properties.start_d <= thresh_d)
-      e_month = (features.properties.end_y == thresh) && (features.properties.end_m > thresh_m)
-      e_day = (features.properties.end_y == thresh) && (features.properties.end_m == thresh_m) && (features.properties.end_d > thresh_d)
+      year = (features.properties.year_sta < thresh) && (features.properties.year_end > thresh)
+      s_month = (features.properties.year_sta == thresh) && (features.properties.mon_sta < thresh_m)
+      s_day = (features.properties.year_sta == thresh) && (features.properties.mon_sta == thresh_m) && (features.properties.day_sta <= thresh_d)
+      e_month = (features.properties.year_end == thresh) && (features.properties.mon_end > thresh_m)
+      e_day = (features.properties.year_end == thresh) && (features.properties.mon_end == thresh_m) && (features.properties.day_end > thresh_d)
       return year || s_month || s_day || e_month || e_day;
     },
     pointToLayer: function(features, latlng) {
@@ -305,6 +305,7 @@ function init(){
     
 </body>
 </html>
+
 
 
 
