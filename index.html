@@ -239,6 +239,7 @@ function updateLayer() {
       var staicon = features.properties.type === '信号場' ? "ss" :
                     features.properties.type === '仮信号場' ? "ss" :
                     features.properties.type === '臨時信号場' ? "ss" :
+                    features.properties.type === '交換所' ? "ss" :
                     features.properties.type === '貨物駅' ? "fs" :
                     features.properties.type === '仮貨物駅' ? "fs" :
                     features.properties.type === '操車場' ? "fs" :
@@ -308,6 +309,7 @@ function init(){
     
 </body>
 </html>
+
 
 
 
