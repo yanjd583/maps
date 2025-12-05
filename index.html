@@ -35,7 +35,7 @@
 <input type="range" id="day-va" min="1" max="31" value="1">
 
 <label><input type="checkbox" id="time-filter-toggle" checked>時系列有効</label>
-<label><input type="checkbox" id="name-filter-toggle" checked>駅名表示</label>
+<label><input type="checkbox" id="name-filter-toggle">駅名表示</label>
 <label><input type="checkbox" id="icon-filter-toggle" checked>駅表示</label>
 <input type="button" value="線路数" onclick="botan()">
 <div id="line_figure" style="display: none;">
@@ -97,7 +97,7 @@ const map = L.map('map', { zoomSnap: 0.1 })
 
 let sta01original, rail01original, sta_name01original;
 let sta01layer, rail01layer, sta_name01layer;
-let sta02original, rail02original, sta_name2original;
+let sta02original, rail02original, sta_name02original;
 let sta02layer, rail02layer, sta_name02layer;
 let sta03original, rail03original, sta_name03original;
 let sta03layer, rail03layer, sta_name03layer;
@@ -1114,6 +1114,7 @@ function init(){
     
 </body>
 </html>
+
 
 
 
