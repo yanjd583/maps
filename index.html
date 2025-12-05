@@ -114,25 +114,21 @@ const elect = document.getElementById('Electrific');
 
 
 // GeoJSONを読み込んで初期化
-
+//--------01-------------------
 fetch('01_Rail_hokkaido.geojson')
   .then(res => res.json())
   .then(data => {
     rail01original = data;
     updateLayer();
   })
-  .catch(err => console.error('GeoJSON 読み込みエラー:', err));
-
-    
+  .catch(err => console.error('GeoJSON 読み込みエラー:', err));    
 fetch('01_Sta_hokkaido.geojson')
   .then(res => res.json())
   .then(data => {
     sta01original = data;
     updateLayer();
   })
-  .catch(erro => console.error('GeoJSON 読み込みエラー:', err));
-
-    
+  .catch(erro => console.error('GeoJSON 読み込みエラー:', err));    
 fetch('01_Sta_hokkaido.geojson')
   .then(res => res.json())
   .then(data => {
@@ -140,6 +136,122 @@ fetch('01_Sta_hokkaido.geojson')
     updateLayer();
   })
   .catch(erro => console.error('GeoJSON 読み込みエラー:', err));
+
+//--------02-------------------
+fetch('02_Rail_tohoku.geojson')
+  .then(res => res.json())
+  .then(data => {
+    rail02original = data;
+    updateLayer();
+  })
+  .catch(err => console.error('GeoJSON 読み込みエラー:', err));    
+fetch('02_Sta_tohoku.geojson')
+  .then(res => res.json())
+  .then(data => {
+    sta02original = data;
+    updateLayer();
+  })
+  .catch(erro => console.error('GeoJSON 読み込みエラー:', err));    
+fetch('02_Sta_tohoku.geojson')
+  .then(res => res.json())
+  .then(data => {
+    sta_name02original = data;
+    updateLayer();
+  })
+  .catch(erro => console.error('GeoJSON 読み込みエラー:', err));
+
+//--------03-------------------
+fetch('03_Rail_tokaido.geojson')
+  .then(res => res.json())
+  .then(data => {
+    rail03original = data;
+    updateLayer();
+  })
+  .catch(err => console.error('GeoJSON 読み込みエラー:', err));    
+fetch('03_Sta_tokaido.geojson')
+  .then(res => res.json())
+  .then(data => {
+    sta03original = data;
+    updateLayer();
+  })
+  .catch(erro => console.error('GeoJSON 読み込みエラー:', err));    
+fetch('03_Sta_tokaido.geojson')
+  .then(res => res.json())
+  .then(data => {
+    sta_name03original = data;
+    updateLayer();
+  })
+  .catch(erro => console.error('GeoJSON 読み込みエラー:', err));
+
+//--------04-------------------
+fetch('04_Rail_tokai.geojson')
+  .then(res => res.json())
+  .then(data => {
+    rail04original = data;
+    updateLayer();
+  })
+  .catch(err => console.error('GeoJSON 読み込みエラー:', err));    
+fetch('04_Sta_tokai.geojson')
+  .then(res => res.json())
+  .then(data => {
+    sta04original = data;
+    updateLayer();
+  })
+  .catch(erro => console.error('GeoJSON 読み込みエラー:', err));    
+fetch('04_Sta_tokai.geojson')
+  .then(res => res.json())
+  .then(data => {
+    sta_name04original = data;
+    updateLayer();
+  })
+  .catch(erro => console.error('GeoJSON 読み込みエラー:', err));
+
+//--------05-------------------
+fetch('05_Rail_chugoku.geojson')
+  .then(res => res.json())
+  .then(data => {
+    rail05original = data;
+    updateLayer();
+  })
+  .catch(err => console.error('GeoJSON 読み込みエラー:', err));    
+fetch('05_Sta_chugoku.geojson')
+  .then(res => res.json())
+  .then(data => {
+    sta05original = data;
+    updateLayer();
+  })
+  .catch(erro => console.error('GeoJSON 読み込みエラー:', err));    
+fetch('05_Sta_chugoku.geojson')
+  .then(res => res.json())
+  .then(data => {
+    sta_name05original = data;
+    updateLayer();
+  })
+  .catch(erro => console.error('GeoJSON 読み込みエラー:', err));
+
+//--------06-------------------
+fetch('06_Rail_kyushu.geojson')
+  .then(res => res.json())
+  .then(data => {
+    rail06original = data;
+    updateLayer();
+  })
+  .catch(err => console.error('GeoJSON 読み込みエラー:', err));    
+fetch('06_Sta_kyushu.geojson')
+  .then(res => res.json())
+  .then(data => {
+    sta06original = data;
+    updateLayer();
+  })
+  .catch(erro => console.error('GeoJSON 読み込みエラー:', err));    
+fetch('06_Sta_kyushu.geojson')
+  .then(res => res.json())
+  .then(data => {
+    sta_name06original = data;
+    updateLayer();
+  })
+  .catch(erro => console.error('GeoJSON 読み込みエラー:', err));
+
 
 // レイヤ更新関数
 function updateLayer() {
@@ -149,15 +261,9 @@ function updateLayer() {
   monthLabel.textContent = thresh_m;
   const thresh_d = +dayInput.value;
   dayLabel.textContent = thresh_d;
-  if (rail01layer) {
-    map.removeLayer(rail01layer);
-  }
-  if (sta01layer) {
-    map.removeLayer(sta01layer);
-  }
-  if (sta_name01layer) {
-    map.removeLayer(sta_name01layer);
-  }
+  if (rail01layer) {map.removeLayer(rail01layer);}
+  if (sta01layer) {map.removeLayer(sta01layer);}
+  if (sta_name01layer) {map.removeLayer(sta_name01layer);}
   rail01layer = L.geoJSON(rail01original, {
     filter: features => {
       if (!TIMEfilterToggle.checked) return true;
@@ -309,6 +415,7 @@ function init(){
     
 </body>
 </html>
+
 
 
 
