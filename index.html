@@ -264,6 +264,24 @@ function updateLayer() {
   if (rail01layer) {map.removeLayer(rail01layer);}
   if (sta01layer) {map.removeLayer(sta01layer);}
   if (sta_name01layer) {map.removeLayer(sta_name01layer);}
+  if (rail02layer) {map.removeLayer(rail02layer);}
+  if (sta02layer) {map.removeLayer(sta02layer);}
+  if (sta_name02layer) {map.removeLayer(sta_name02layer);}
+  if (rail03layer) {map.removeLayer(rail03layer);}
+  if (sta03layer) {map.removeLayer(sta03layer);}
+  if (sta_name03layer) {map.removeLayer(sta_name03layer);}
+  if (rail04layer) {map.removeLayer(rail04layer);}
+  if (sta04layer) {map.removeLayer(sta04layer);}
+  if (sta_name04layer) {map.removeLayer(sta_name04layer);}
+  if (rail05layer) {map.removeLayer(rail05layer);}
+  if (sta05layer) {map.removeLayer(sta05layer);}
+  if (sta_name05layer) {map.removeLayer(sta_name05layer);}
+  if (rail06layer) {map.removeLayer(rail06layer);}
+  if (sta06layer) {map.removeLayer(sta06layer);}
+  if (sta_name06layer) {map.removeLayer(sta_name06layer);}
+
+
+//--------------------------------01----------------------------------------------------	
   rail01layer = L.geoJSON(rail01original, {
     filter: features => {
       if (!TIMEfilterToggle.checked) return true;
@@ -391,11 +409,668 @@ function updateLayer() {
     }    
   }).addTo(map);
 
+
+
+//--------------------------------02----------------------------------------------------	
+  rail02layer = L.geoJSON(rail02original, {
+    filter: features => {
+      if (!TIMEfilterToggle.checked) return true;
+      year = (features.properties.year_sta < thresh) && (features.properties.year_end > thresh)
+      s_month = (features.properties.year_sta == thresh) && (features.properties.mon_sta < thresh_m)
+      s_day = (features.properties.year_sta == thresh) && (features.properties.mon_sta == thresh_m) && (features.properties.day_sta <= thresh_d)
+      e_month = (features.properties.year_end == thresh) && (features.properties.mon_end > thresh_m)
+      e_day = (features.properties.year_end == thresh) && (features.properties.mon_end == thresh_m) && (features.properties.day_end > thresh_d)
+      return year || s_month || s_day || e_month || e_day;
+    },
+    //pointToLayer: function(features, latlng) {
+    //  return L.marker(latlng, {icon: customIcon});
+    //},
+
+    style: (features) => {
+      const styleOptions = {
+        weight: features.properties.line * 2
+      };
+
+      if (owner.checked) {
+        styleOptions.color = features.properties.N05_001 === '1' ? '#ff0000' ://赤
+                             features.properties.N05_001 === '2' ? '#000000' ://黒
+                             features.properties.N05_001 === '3' ? '#0000aa' ://紺
+                             features.properties.N05_001 === '4' ? '#0088ff' ://緑
+                             features.properties.N05_001 === '5' ? '#008800' ://青
+                             features.properties.N05_001 === '6' ? '#880088' ://紫
+                             features.properties.N05_001 === '7' ? '#773300' ://茶
+                             '#777777';//灰
+      } else if (gauge_size.checked) {
+        styleOptions.color = features.properties.gauge === 1435 ? '#ff0000' ://赤
+                             features.properties.gauge === 1372 ? '#880088' ://紫
+                             features.properties.gauge === 1067 ? '#0088ff' ://青
+                             features.properties.gauge === 1050 ? '#008800' ://緑
+                             features.properties.gauge === 762 ? '#773300' ://茶
+                             features.properties.gauge === 1 ? '#ff55cc' ://桃 モノレール
+                             features.properties.gauge === 2 ? '#0000aa' ://紺 新交通
+                             '#000000';//黒
+      } else if (elect.checked) {
+        styleOptions.color = features.properties.Electrific === 'AC 25000V' ? '#ff0000' ://赤
+                             features.properties.Electrific === 'AC 20000V' ? '#ff55cc' ://桃
+                             features.properties.Electrific === 'DC 1500V' ? '#0000aa' ://紺
+                             features.properties.Electrific === 'DC 750V' ? '#0088ff' ://青
+                             features.properties.Electrific === 'DC 600V' ? '#008800' ://緑
+                             '#000000';//黒
+      } else {
+        styleOptions.color = '#000000';//黒
+      }
+
+      return styleOptions;
+    },
+    
+    onEachFeature: (features, layer) => {
+      layer.bindPopup(`会社: ${features.properties.N05_003}<br>
+      路線: ${features.properties.N05_002}<br>
+      軌間: ${features.properties.gauge}<br>
+      電化: ${features.properties.Electrific}<br>
+      開業: ${features.properties.start_org} ± ${features.properties.staorg_s}日<br>
+      自: ${features.properties.start} ± ${features.properties.start_s}日<br>
+      至: ${features.properties.end} ± ${features.properties.end_s}日<br>
+      廃止: ${features.properties.end_org} ± ${features.properties.endorg_s}日`);
+    }
+    
+  }).addTo(map);
+
+  sta02layer = L.geoJSON(sta02original, {
+    filter: features => {
+	  if (!ICONfilterToggle.checked) return false;
+      if (!TIMEfilterToggle.checked) return true;
+      year = (features.properties.year_sta < thresh) && (features.properties.year_end > thresh)
+      s_month = (features.properties.year_sta == thresh) && (features.properties.mon_sta < thresh_m)
+      s_day = (features.properties.year_sta == thresh) && (features.properties.mon_sta == thresh_m) && (features.properties.day_sta <= thresh_d)
+      e_month = (features.properties.year_end == thresh) && (features.properties.mon_end > thresh_m)
+      e_day = (features.properties.year_end == thresh) && (features.properties.mon_end == thresh_m) && (features.properties.day_end > thresh_d)
+      return year || s_month || s_day || e_month || e_day;
+		  if (!ICONfilterToggle.checked) return false;
+    },
+    
+    pointToLayer: function(features, latlng) {
+      var staicon = features.properties.type === '信号場' ? "ss" :
+                    features.properties.type === '仮信号場' ? "ss" :
+                    features.properties.type === '臨時信号場' ? "ss" :
+                    features.properties.type === '交換所' ? "ss" :
+                    features.properties.type === '貨物駅' ? "fs" :
+                    features.properties.type === '仮貨物駅' ? "fs" :
+                    features.properties.type === '操車場' ? "fs" :
+                    features.properties.type === 'バス停' ? "bs" :
+                    "st";
+      
+      return L.marker(latlng, {icon: staicon === "st" ? L.icon({iconUrl: 'sta.svg', iconSize: [10, 10]}) :
+                                     staicon === "bs" ? L.icon({iconUrl: 'bus_sta.svg', iconSize: [11, 11]}) :
+                                     staicon === "ss" ? L.icon({iconUrl: 'sig_sta.svg', iconSize: [11, 11]}) :
+                                     staicon === "fs" ? L.icon({iconUrl: 'fre_sta.svg', iconSize: [12, 12]}) :
+                                     L.icon({iconUrl: 'sta.svg', iconSize: [10, 10]
+                              , html: features.properties.N05_011}) 
+                     });
+    },
+    
+    onEachFeature: (features, layer) => {
+      layer.bindPopup(`駅名:<b> ${features.properties.N05_011}</b><br>
+      会社: ${features.properties.N05_003}<br>
+      路線: ${features.properties.N05_002}<br>
+      開業: ${features.properties.start_org} ± ${features.properties.staorg_s}日<br>
+      自: ${features.properties.start} ± ${features.properties.start_s}日<br>
+      至: ${features.properties.end} ± ${features.properties.end_s}日<br>
+      廃止: ${features.properties.end_org} ± ${features.properties.endorg_s}日`);
+    }
+    
+  }).addTo(map);
+
+
+  sta_name02layer = L.geoJSON(sta_name02original, {
+    filter: features => {
+	    if (!NAMEfilterToggle.checked) return false;
+      if (!TIMEfilterToggle.checked) return true;
+      year = (features.properties.year_sta < thresh) && (features.properties.year_end > thresh)
+      s_month = (features.properties.year_sta == thresh) && (features.properties.mon_sta < thresh_m)
+      s_day = (features.properties.year_sta == thresh) && (features.properties.mon_sta == thresh_m) && (features.properties.day_sta <= thresh_d)
+      e_month = (features.properties.year_end == thresh) && (features.properties.mon_end > thresh_m)
+      e_day = (features.properties.year_end == thresh) && (features.properties.mon_end == thresh_m) && (features.properties.day_end > thresh_d)
+      return year || s_month || s_day || e_month || e_day;
+    },
+    pointToLayer: function(features, latlng) {
+	return L.marker(latlng, {icon: L.divIcon({html: '<div class="icontext">' + features.properties.N05_011 + '</div>', iconSize: [0, 0]}) 
+                     });
+    }    
+  }).addTo(map);
+
+
+
+//--------------------------------03----------------------------------------------------	
+  rail03layer = L.geoJSON(rail03original, {
+    filter: features => {
+      if (!TIMEfilterToggle.checked) return true;
+      year = (features.properties.year_sta < thresh) && (features.properties.year_end > thresh)
+      s_month = (features.properties.year_sta == thresh) && (features.properties.mon_sta < thresh_m)
+      s_day = (features.properties.year_sta == thresh) && (features.properties.mon_sta == thresh_m) && (features.properties.day_sta <= thresh_d)
+      e_month = (features.properties.year_end == thresh) && (features.properties.mon_end > thresh_m)
+      e_day = (features.properties.year_end == thresh) && (features.properties.mon_end == thresh_m) && (features.properties.day_end > thresh_d)
+      return year || s_month || s_day || e_month || e_day;
+    },
+    //pointToLayer: function(features, latlng) {
+    //  return L.marker(latlng, {icon: customIcon});
+    //},
+
+    style: (features) => {
+      const styleOptions = {
+        weight: features.properties.line * 2
+      };
+
+      if (owner.checked) {
+        styleOptions.color = features.properties.N05_001 === '1' ? '#ff0000' ://赤
+                             features.properties.N05_001 === '2' ? '#000000' ://黒
+                             features.properties.N05_001 === '3' ? '#0000aa' ://紺
+                             features.properties.N05_001 === '4' ? '#0088ff' ://緑
+                             features.properties.N05_001 === '5' ? '#008800' ://青
+                             features.properties.N05_001 === '6' ? '#880088' ://紫
+                             features.properties.N05_001 === '7' ? '#773300' ://茶
+                             '#777777';//灰
+      } else if (gauge_size.checked) {
+        styleOptions.color = features.properties.gauge === 1435 ? '#ff0000' ://赤
+                             features.properties.gauge === 1372 ? '#880088' ://紫
+                             features.properties.gauge === 1067 ? '#0088ff' ://青
+                             features.properties.gauge === 1050 ? '#008800' ://緑
+                             features.properties.gauge === 762 ? '#773300' ://茶
+                             features.properties.gauge === 1 ? '#ff55cc' ://桃 モノレール
+                             features.properties.gauge === 2 ? '#0000aa' ://紺 新交通
+                             '#000000';//黒
+      } else if (elect.checked) {
+        styleOptions.color = features.properties.Electrific === 'AC 25000V' ? '#ff0000' ://赤
+                             features.properties.Electrific === 'AC 20000V' ? '#ff55cc' ://桃
+                             features.properties.Electrific === 'DC 1500V' ? '#0000aa' ://紺
+                             features.properties.Electrific === 'DC 750V' ? '#0088ff' ://青
+                             features.properties.Electrific === 'DC 600V' ? '#008800' ://緑
+                             '#000000';//黒
+      } else {
+        styleOptions.color = '#000000';//黒
+      }
+
+      return styleOptions;
+    },
+    
+    onEachFeature: (features, layer) => {
+      layer.bindPopup(`会社: ${features.properties.N05_003}<br>
+      路線: ${features.properties.N05_002}<br>
+      軌間: ${features.properties.gauge}<br>
+      電化: ${features.properties.Electrific}<br>
+      開業: ${features.properties.start_org} ± ${features.properties.staorg_s}日<br>
+      自: ${features.properties.start} ± ${features.properties.start_s}日<br>
+      至: ${features.properties.end} ± ${features.properties.end_s}日<br>
+      廃止: ${features.properties.end_org} ± ${features.properties.endorg_s}日`);
+    }
+    
+  }).addTo(map);
+
+  sta03layer = L.geoJSON(sta03original, {
+    filter: features => {
+	  if (!ICONfilterToggle.checked) return false;
+      if (!TIMEfilterToggle.checked) return true;
+      year = (features.properties.year_sta < thresh) && (features.properties.year_end > thresh)
+      s_month = (features.properties.year_sta == thresh) && (features.properties.mon_sta < thresh_m)
+      s_day = (features.properties.year_sta == thresh) && (features.properties.mon_sta == thresh_m) && (features.properties.day_sta <= thresh_d)
+      e_month = (features.properties.year_end == thresh) && (features.properties.mon_end > thresh_m)
+      e_day = (features.properties.year_end == thresh) && (features.properties.mon_end == thresh_m) && (features.properties.day_end > thresh_d)
+      return year || s_month || s_day || e_month || e_day;
+		  if (!ICONfilterToggle.checked) return false;
+    },
+    
+    pointToLayer: function(features, latlng) {
+      var staicon = features.properties.type === '信号場' ? "ss" :
+                    features.properties.type === '仮信号場' ? "ss" :
+                    features.properties.type === '臨時信号場' ? "ss" :
+                    features.properties.type === '交換所' ? "ss" :
+                    features.properties.type === '貨物駅' ? "fs" :
+                    features.properties.type === '仮貨物駅' ? "fs" :
+                    features.properties.type === '操車場' ? "fs" :
+                    features.properties.type === 'バス停' ? "bs" :
+                    "st";
+      
+      return L.marker(latlng, {icon: staicon === "st" ? L.icon({iconUrl: 'sta.svg', iconSize: [10, 10]}) :
+                                     staicon === "bs" ? L.icon({iconUrl: 'bus_sta.svg', iconSize: [11, 11]}) :
+                                     staicon === "ss" ? L.icon({iconUrl: 'sig_sta.svg', iconSize: [11, 11]}) :
+                                     staicon === "fs" ? L.icon({iconUrl: 'fre_sta.svg', iconSize: [12, 12]}) :
+                                     L.icon({iconUrl: 'sta.svg', iconSize: [10, 10]
+                              , html: features.properties.N05_011}) 
+                     });
+    },
+    
+    onEachFeature: (features, layer) => {
+      layer.bindPopup(`駅名:<b> ${features.properties.N05_011}</b><br>
+      会社: ${features.properties.N05_003}<br>
+      路線: ${features.properties.N05_002}<br>
+      開業: ${features.properties.start_org} ± ${features.properties.staorg_s}日<br>
+      自: ${features.properties.start} ± ${features.properties.start_s}日<br>
+      至: ${features.properties.end} ± ${features.properties.end_s}日<br>
+      廃止: ${features.properties.end_org} ± ${features.properties.endorg_s}日`);
+    }
+    
+  }).addTo(map);
+
+
+  sta_name03layer = L.geoJSON(sta_name03original, {
+    filter: features => {
+	    if (!NAMEfilterToggle.checked) return false;
+      if (!TIMEfilterToggle.checked) return true;
+      year = (features.properties.year_sta < thresh) && (features.properties.year_end > thresh)
+      s_month = (features.properties.year_sta == thresh) && (features.properties.mon_sta < thresh_m)
+      s_day = (features.properties.year_sta == thresh) && (features.properties.mon_sta == thresh_m) && (features.properties.day_sta <= thresh_d)
+      e_month = (features.properties.year_end == thresh) && (features.properties.mon_end > thresh_m)
+      e_day = (features.properties.year_end == thresh) && (features.properties.mon_end == thresh_m) && (features.properties.day_end > thresh_d)
+      return year || s_month || s_day || e_month || e_day;
+    },
+    pointToLayer: function(features, latlng) {
+	return L.marker(latlng, {icon: L.divIcon({html: '<div class="icontext">' + features.properties.N05_011 + '</div>', iconSize: [0, 0]}) 
+                     });
+    }    
+  }).addTo(map);
+
+
+
+//--------------------------------04----------------------------------------------------	
+  rail04layer = L.geoJSON(rail04original, {
+    filter: features => {
+      if (!TIMEfilterToggle.checked) return true;
+      year = (features.properties.year_sta < thresh) && (features.properties.year_end > thresh)
+      s_month = (features.properties.year_sta == thresh) && (features.properties.mon_sta < thresh_m)
+      s_day = (features.properties.year_sta == thresh) && (features.properties.mon_sta == thresh_m) && (features.properties.day_sta <= thresh_d)
+      e_month = (features.properties.year_end == thresh) && (features.properties.mon_end > thresh_m)
+      e_day = (features.properties.year_end == thresh) && (features.properties.mon_end == thresh_m) && (features.properties.day_end > thresh_d)
+      return year || s_month || s_day || e_month || e_day;
+    },
+    //pointToLayer: function(features, latlng) {
+    //  return L.marker(latlng, {icon: customIcon});
+    //},
+
+    style: (features) => {
+      const styleOptions = {
+        weight: features.properties.line * 2
+      };
+
+      if (owner.checked) {
+        styleOptions.color = features.properties.N05_001 === '1' ? '#ff0000' ://赤
+                             features.properties.N05_001 === '2' ? '#000000' ://黒
+                             features.properties.N05_001 === '3' ? '#0000aa' ://紺
+                             features.properties.N05_001 === '4' ? '#0088ff' ://緑
+                             features.properties.N05_001 === '5' ? '#008800' ://青
+                             features.properties.N05_001 === '6' ? '#880088' ://紫
+                             features.properties.N05_001 === '7' ? '#773300' ://茶
+                             '#777777';//灰
+      } else if (gauge_size.checked) {
+        styleOptions.color = features.properties.gauge === 1435 ? '#ff0000' ://赤
+                             features.properties.gauge === 1372 ? '#880088' ://紫
+                             features.properties.gauge === 1067 ? '#0088ff' ://青
+                             features.properties.gauge === 1050 ? '#008800' ://緑
+                             features.properties.gauge === 762 ? '#773300' ://茶
+                             features.properties.gauge === 1 ? '#ff55cc' ://桃 モノレール
+                             features.properties.gauge === 2 ? '#0000aa' ://紺 新交通
+                             '#000000';//黒
+      } else if (elect.checked) {
+        styleOptions.color = features.properties.Electrific === 'AC 25000V' ? '#ff0000' ://赤
+                             features.properties.Electrific === 'AC 20000V' ? '#ff55cc' ://桃
+                             features.properties.Electrific === 'DC 1500V' ? '#0000aa' ://紺
+                             features.properties.Electrific === 'DC 750V' ? '#0088ff' ://青
+                             features.properties.Electrific === 'DC 600V' ? '#008800' ://緑
+                             '#000000';//黒
+      } else {
+        styleOptions.color = '#000000';//黒
+      }
+
+      return styleOptions;
+    },
+    
+    onEachFeature: (features, layer) => {
+      layer.bindPopup(`会社: ${features.properties.N05_003}<br>
+      路線: ${features.properties.N05_002}<br>
+      軌間: ${features.properties.gauge}<br>
+      電化: ${features.properties.Electrific}<br>
+      開業: ${features.properties.start_org} ± ${features.properties.staorg_s}日<br>
+      自: ${features.properties.start} ± ${features.properties.start_s}日<br>
+      至: ${features.properties.end} ± ${features.properties.end_s}日<br>
+      廃止: ${features.properties.end_org} ± ${features.properties.endorg_s}日`);
+    }
+    
+  }).addTo(map);
+
+  sta04layer = L.geoJSON(sta04original, {
+    filter: features => {
+	  if (!ICONfilterToggle.checked) return false;
+      if (!TIMEfilterToggle.checked) return true;
+      year = (features.properties.year_sta < thresh) && (features.properties.year_end > thresh)
+      s_month = (features.properties.year_sta == thresh) && (features.properties.mon_sta < thresh_m)
+      s_day = (features.properties.year_sta == thresh) && (features.properties.mon_sta == thresh_m) && (features.properties.day_sta <= thresh_d)
+      e_month = (features.properties.year_end == thresh) && (features.properties.mon_end > thresh_m)
+      e_day = (features.properties.year_end == thresh) && (features.properties.mon_end == thresh_m) && (features.properties.day_end > thresh_d)
+      return year || s_month || s_day || e_month || e_day;
+		  if (!ICONfilterToggle.checked) return false;
+    },
+    
+    pointToLayer: function(features, latlng) {
+      var staicon = features.properties.type === '信号場' ? "ss" :
+                    features.properties.type === '仮信号場' ? "ss" :
+                    features.properties.type === '臨時信号場' ? "ss" :
+                    features.properties.type === '交換所' ? "ss" :
+                    features.properties.type === '貨物駅' ? "fs" :
+                    features.properties.type === '仮貨物駅' ? "fs" :
+                    features.properties.type === '操車場' ? "fs" :
+                    features.properties.type === 'バス停' ? "bs" :
+                    "st";
+      
+      return L.marker(latlng, {icon: staicon === "st" ? L.icon({iconUrl: 'sta.svg', iconSize: [10, 10]}) :
+                                     staicon === "bs" ? L.icon({iconUrl: 'bus_sta.svg', iconSize: [11, 11]}) :
+                                     staicon === "ss" ? L.icon({iconUrl: 'sig_sta.svg', iconSize: [11, 11]}) :
+                                     staicon === "fs" ? L.icon({iconUrl: 'fre_sta.svg', iconSize: [12, 12]}) :
+                                     L.icon({iconUrl: 'sta.svg', iconSize: [10, 10]
+                              , html: features.properties.N05_011}) 
+                     });
+    },
+    
+    onEachFeature: (features, layer) => {
+      layer.bindPopup(`駅名:<b> ${features.properties.N05_011}</b><br>
+      会社: ${features.properties.N05_003}<br>
+      路線: ${features.properties.N05_002}<br>
+      開業: ${features.properties.start_org} ± ${features.properties.staorg_s}日<br>
+      自: ${features.properties.start} ± ${features.properties.start_s}日<br>
+      至: ${features.properties.end} ± ${features.properties.end_s}日<br>
+      廃止: ${features.properties.end_org} ± ${features.properties.endorg_s}日`);
+    }
+    
+  }).addTo(map);
+
+
+  sta_name04layer = L.geoJSON(sta_name04original, {
+    filter: features => {
+	    if (!NAMEfilterToggle.checked) return false;
+      if (!TIMEfilterToggle.checked) return true;
+      year = (features.properties.year_sta < thresh) && (features.properties.year_end > thresh)
+      s_month = (features.properties.year_sta == thresh) && (features.properties.mon_sta < thresh_m)
+      s_day = (features.properties.year_sta == thresh) && (features.properties.mon_sta == thresh_m) && (features.properties.day_sta <= thresh_d)
+      e_month = (features.properties.year_end == thresh) && (features.properties.mon_end > thresh_m)
+      e_day = (features.properties.year_end == thresh) && (features.properties.mon_end == thresh_m) && (features.properties.day_end > thresh_d)
+      return year || s_month || s_day || e_month || e_day;
+    },
+    pointToLayer: function(features, latlng) {
+	return L.marker(latlng, {icon: L.divIcon({html: '<div class="icontext">' + features.properties.N05_011 + '</div>', iconSize: [0, 0]}) 
+                     });
+    }    
+  }).addTo(map);
+
+
+
+//--------------------------------05----------------------------------------------------	
+  rail05layer = L.geoJSON(rail05original, {
+    filter: features => {
+      if (!TIMEfilterToggle.checked) return true;
+      year = (features.properties.year_sta < thresh) && (features.properties.year_end > thresh)
+      s_month = (features.properties.year_sta == thresh) && (features.properties.mon_sta < thresh_m)
+      s_day = (features.properties.year_sta == thresh) && (features.properties.mon_sta == thresh_m) && (features.properties.day_sta <= thresh_d)
+      e_month = (features.properties.year_end == thresh) && (features.properties.mon_end > thresh_m)
+      e_day = (features.properties.year_end == thresh) && (features.properties.mon_end == thresh_m) && (features.properties.day_end > thresh_d)
+      return year || s_month || s_day || e_month || e_day;
+    },
+    //pointToLayer: function(features, latlng) {
+    //  return L.marker(latlng, {icon: customIcon});
+    //},
+
+    style: (features) => {
+      const styleOptions = {
+        weight: features.properties.line * 2
+      };
+
+      if (owner.checked) {
+        styleOptions.color = features.properties.N05_001 === '1' ? '#ff0000' ://赤
+                             features.properties.N05_001 === '2' ? '#000000' ://黒
+                             features.properties.N05_001 === '3' ? '#0000aa' ://紺
+                             features.properties.N05_001 === '4' ? '#0088ff' ://緑
+                             features.properties.N05_001 === '5' ? '#008800' ://青
+                             features.properties.N05_001 === '6' ? '#880088' ://紫
+                             features.properties.N05_001 === '7' ? '#773300' ://茶
+                             '#777777';//灰
+      } else if (gauge_size.checked) {
+        styleOptions.color = features.properties.gauge === 1435 ? '#ff0000' ://赤
+                             features.properties.gauge === 1372 ? '#880088' ://紫
+                             features.properties.gauge === 1067 ? '#0088ff' ://青
+                             features.properties.gauge === 1050 ? '#008800' ://緑
+                             features.properties.gauge === 762 ? '#773300' ://茶
+                             features.properties.gauge === 1 ? '#ff55cc' ://桃 モノレール
+                             features.properties.gauge === 2 ? '#0000aa' ://紺 新交通
+                             '#000000';//黒
+      } else if (elect.checked) {
+        styleOptions.color = features.properties.Electrific === 'AC 25000V' ? '#ff0000' ://赤
+                             features.properties.Electrific === 'AC 20000V' ? '#ff55cc' ://桃
+                             features.properties.Electrific === 'DC 1500V' ? '#0000aa' ://紺
+                             features.properties.Electrific === 'DC 750V' ? '#0088ff' ://青
+                             features.properties.Electrific === 'DC 600V' ? '#008800' ://緑
+                             '#000000';//黒
+      } else {
+        styleOptions.color = '#000000';//黒
+      }
+
+      return styleOptions;
+    },
+    
+    onEachFeature: (features, layer) => {
+      layer.bindPopup(`会社: ${features.properties.N05_003}<br>
+      路線: ${features.properties.N05_002}<br>
+      軌間: ${features.properties.gauge}<br>
+      電化: ${features.properties.Electrific}<br>
+      開業: ${features.properties.start_org} ± ${features.properties.staorg_s}日<br>
+      自: ${features.properties.start} ± ${features.properties.start_s}日<br>
+      至: ${features.properties.end} ± ${features.properties.end_s}日<br>
+      廃止: ${features.properties.end_org} ± ${features.properties.endorg_s}日`);
+    }
+    
+  }).addTo(map);
+
+  sta05layer = L.geoJSON(sta05original, {
+    filter: features => {
+	  if (!ICONfilterToggle.checked) return false;
+      if (!TIMEfilterToggle.checked) return true;
+      year = (features.properties.year_sta < thresh) && (features.properties.year_end > thresh)
+      s_month = (features.properties.year_sta == thresh) && (features.properties.mon_sta < thresh_m)
+      s_day = (features.properties.year_sta == thresh) && (features.properties.mon_sta == thresh_m) && (features.properties.day_sta <= thresh_d)
+      e_month = (features.properties.year_end == thresh) && (features.properties.mon_end > thresh_m)
+      e_day = (features.properties.year_end == thresh) && (features.properties.mon_end == thresh_m) && (features.properties.day_end > thresh_d)
+      return year || s_month || s_day || e_month || e_day;
+		  if (!ICONfilterToggle.checked) return false;
+    },
+    
+    pointToLayer: function(features, latlng) {
+      var staicon = features.properties.type === '信号場' ? "ss" :
+                    features.properties.type === '仮信号場' ? "ss" :
+                    features.properties.type === '臨時信号場' ? "ss" :
+                    features.properties.type === '交換所' ? "ss" :
+                    features.properties.type === '貨物駅' ? "fs" :
+                    features.properties.type === '仮貨物駅' ? "fs" :
+                    features.properties.type === '操車場' ? "fs" :
+                    features.properties.type === 'バス停' ? "bs" :
+                    "st";
+      
+      return L.marker(latlng, {icon: staicon === "st" ? L.icon({iconUrl: 'sta.svg', iconSize: [10, 10]}) :
+                                     staicon === "bs" ? L.icon({iconUrl: 'bus_sta.svg', iconSize: [11, 11]}) :
+                                     staicon === "ss" ? L.icon({iconUrl: 'sig_sta.svg', iconSize: [11, 11]}) :
+                                     staicon === "fs" ? L.icon({iconUrl: 'fre_sta.svg', iconSize: [12, 12]}) :
+                                     L.icon({iconUrl: 'sta.svg', iconSize: [10, 10]
+                              , html: features.properties.N05_011}) 
+                     });
+    },
+    
+    onEachFeature: (features, layer) => {
+      layer.bindPopup(`駅名:<b> ${features.properties.N05_011}</b><br>
+      会社: ${features.properties.N05_003}<br>
+      路線: ${features.properties.N05_002}<br>
+      開業: ${features.properties.start_org} ± ${features.properties.staorg_s}日<br>
+      自: ${features.properties.start} ± ${features.properties.start_s}日<br>
+      至: ${features.properties.end} ± ${features.properties.end_s}日<br>
+      廃止: ${features.properties.end_org} ± ${features.properties.endorg_s}日`);
+    }
+    
+  }).addTo(map);
+
+
+  sta_name05layer = L.geoJSON(sta_name05original, {
+    filter: features => {
+	    if (!NAMEfilterToggle.checked) return false;
+      if (!TIMEfilterToggle.checked) return true;
+      year = (features.properties.year_sta < thresh) && (features.properties.year_end > thresh)
+      s_month = (features.properties.year_sta == thresh) && (features.properties.mon_sta < thresh_m)
+      s_day = (features.properties.year_sta == thresh) && (features.properties.mon_sta == thresh_m) && (features.properties.day_sta <= thresh_d)
+      e_month = (features.properties.year_end == thresh) && (features.properties.mon_end > thresh_m)
+      e_day = (features.properties.year_end == thresh) && (features.properties.mon_end == thresh_m) && (features.properties.day_end > thresh_d)
+      return year || s_month || s_day || e_month || e_day;
+    },
+    pointToLayer: function(features, latlng) {
+	return L.marker(latlng, {icon: L.divIcon({html: '<div class="icontext">' + features.properties.N05_011 + '</div>', iconSize: [0, 0]}) 
+                     });
+    }    
+  }).addTo(map);
+
+
+
+//--------------------------------06----------------------------------------------------	
+  rail06layer = L.geoJSON(rail06original, {
+    filter: features => {
+      if (!TIMEfilterToggle.checked) return true;
+      year = (features.properties.year_sta < thresh) && (features.properties.year_end > thresh)
+      s_month = (features.properties.year_sta == thresh) && (features.properties.mon_sta < thresh_m)
+      s_day = (features.properties.year_sta == thresh) && (features.properties.mon_sta == thresh_m) && (features.properties.day_sta <= thresh_d)
+      e_month = (features.properties.year_end == thresh) && (features.properties.mon_end > thresh_m)
+      e_day = (features.properties.year_end == thresh) && (features.properties.mon_end == thresh_m) && (features.properties.day_end > thresh_d)
+      return year || s_month || s_day || e_month || e_day;
+    },
+    //pointToLayer: function(features, latlng) {
+    //  return L.marker(latlng, {icon: customIcon});
+    //},
+
+    style: (features) => {
+      const styleOptions = {
+        weight: features.properties.line * 2
+      };
+
+      if (owner.checked) {
+        styleOptions.color = features.properties.N05_001 === '1' ? '#ff0000' ://赤
+                             features.properties.N05_001 === '2' ? '#000000' ://黒
+                             features.properties.N05_001 === '3' ? '#0000aa' ://紺
+                             features.properties.N05_001 === '4' ? '#0088ff' ://緑
+                             features.properties.N05_001 === '5' ? '#008800' ://青
+                             features.properties.N05_001 === '6' ? '#880088' ://紫
+                             features.properties.N05_001 === '7' ? '#773300' ://茶
+                             '#777777';//灰
+      } else if (gauge_size.checked) {
+        styleOptions.color = features.properties.gauge === 1435 ? '#ff0000' ://赤
+                             features.properties.gauge === 1372 ? '#880088' ://紫
+                             features.properties.gauge === 1067 ? '#0088ff' ://青
+                             features.properties.gauge === 1050 ? '#008800' ://緑
+                             features.properties.gauge === 762 ? '#773300' ://茶
+                             features.properties.gauge === 1 ? '#ff55cc' ://桃 モノレール
+                             features.properties.gauge === 2 ? '#0000aa' ://紺 新交通
+                             '#000000';//黒
+      } else if (elect.checked) {
+        styleOptions.color = features.properties.Electrific === 'AC 25000V' ? '#ff0000' ://赤
+                             features.properties.Electrific === 'AC 20000V' ? '#ff55cc' ://桃
+                             features.properties.Electrific === 'DC 1500V' ? '#0000aa' ://紺
+                             features.properties.Electrific === 'DC 750V' ? '#0088ff' ://青
+                             features.properties.Electrific === 'DC 600V' ? '#008800' ://緑
+                             '#000000';//黒
+      } else {
+        styleOptions.color = '#000000';//黒
+      }
+
+      return styleOptions;
+    },
+    
+    onEachFeature: (features, layer) => {
+      layer.bindPopup(`会社: ${features.properties.N05_003}<br>
+      路線: ${features.properties.N05_002}<br>
+      軌間: ${features.properties.gauge}<br>
+      電化: ${features.properties.Electrific}<br>
+      開業: ${features.properties.start_org} ± ${features.properties.staorg_s}日<br>
+      自: ${features.properties.start} ± ${features.properties.start_s}日<br>
+      至: ${features.properties.end} ± ${features.properties.end_s}日<br>
+      廃止: ${features.properties.end_org} ± ${features.properties.endorg_s}日`);
+    }
+    
+  }).addTo(map);
+
+  sta06layer = L.geoJSON(sta06original, {
+    filter: features => {
+	  if (!ICONfilterToggle.checked) return false;
+      if (!TIMEfilterToggle.checked) return true;
+      year = (features.properties.year_sta < thresh) && (features.properties.year_end > thresh)
+      s_month = (features.properties.year_sta == thresh) && (features.properties.mon_sta < thresh_m)
+      s_day = (features.properties.year_sta == thresh) && (features.properties.mon_sta == thresh_m) && (features.properties.day_sta <= thresh_d)
+      e_month = (features.properties.year_end == thresh) && (features.properties.mon_end > thresh_m)
+      e_day = (features.properties.year_end == thresh) && (features.properties.mon_end == thresh_m) && (features.properties.day_end > thresh_d)
+      return year || s_month || s_day || e_month || e_day;
+		  if (!ICONfilterToggle.checked) return false;
+    },
+    
+    pointToLayer: function(features, latlng) {
+      var staicon = features.properties.type === '信号場' ? "ss" :
+                    features.properties.type === '仮信号場' ? "ss" :
+                    features.properties.type === '臨時信号場' ? "ss" :
+                    features.properties.type === '交換所' ? "ss" :
+                    features.properties.type === '貨物駅' ? "fs" :
+                    features.properties.type === '仮貨物駅' ? "fs" :
+                    features.properties.type === '操車場' ? "fs" :
+                    features.properties.type === 'バス停' ? "bs" :
+                    "st";
+      
+      return L.marker(latlng, {icon: staicon === "st" ? L.icon({iconUrl: 'sta.svg', iconSize: [10, 10]}) :
+                                     staicon === "bs" ? L.icon({iconUrl: 'bus_sta.svg', iconSize: [11, 11]}) :
+                                     staicon === "ss" ? L.icon({iconUrl: 'sig_sta.svg', iconSize: [11, 11]}) :
+                                     staicon === "fs" ? L.icon({iconUrl: 'fre_sta.svg', iconSize: [12, 12]}) :
+                                     L.icon({iconUrl: 'sta.svg', iconSize: [10, 10]
+                              , html: features.properties.N05_011}) 
+                     });
+    },
+    
+    onEachFeature: (features, layer) => {
+      layer.bindPopup(`駅名:<b> ${features.properties.N05_011}</b><br>
+      会社: ${features.properties.N05_003}<br>
+      路線: ${features.properties.N05_002}<br>
+      開業: ${features.properties.start_org} ± ${features.properties.staorg_s}日<br>
+      自: ${features.properties.start} ± ${features.properties.start_s}日<br>
+      至: ${features.properties.end} ± ${features.properties.end_s}日<br>
+      廃止: ${features.properties.end_org} ± ${features.properties.endorg_s}日`);
+    }
+    
+  }).addTo(map);
+
+
+  sta_name06layer = L.geoJSON(sta_name06original, {
+    filter: features => {
+	    if (!NAMEfilterToggle.checked) return false;
+      if (!TIMEfilterToggle.checked) return true;
+      year = (features.properties.year_sta < thresh) && (features.properties.year_end > thresh)
+      s_month = (features.properties.year_sta == thresh) && (features.properties.mon_sta < thresh_m)
+      s_day = (features.properties.year_sta == thresh) && (features.properties.mon_sta == thresh_m) && (features.properties.day_sta <= thresh_d)
+      e_month = (features.properties.year_end == thresh) && (features.properties.mon_end > thresh_m)
+      e_day = (features.properties.year_end == thresh) && (features.properties.mon_end == thresh_m) && (features.properties.day_end > thresh_d)
+      return year || s_month || s_day || e_month || e_day;
+    },
+    pointToLayer: function(features, latlng) {
+	return L.marker(latlng, {icon: L.divIcon({html: '<div class="icontext">' + features.properties.N05_011 + '</div>', iconSize: [0, 0]}) 
+                     });
+    }    
+  }).addTo(map);
+
+
+
+	
+
 }
 
+
+
+	
 function init(){
     var overlay = {
-   	    "rail": rail01layer,
+   	    "rail": rail01layer,rail02layer,rail03layer,rail04layer,rail05layer,rail06layer,
 	    "staname": sta_name01layer,
        	"station": sta01layer,
    	}
@@ -415,6 +1090,7 @@ function init(){
     
 </body>
 </html>
+
 
 
 
