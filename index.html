@@ -39,9 +39,8 @@
 <label><input type="checkbox" id="icon-filter-toggle" checked>駅表示</label>
 <input type="button" value="線路数" onclick="botan()">
 <div id="line_figure" style="display: none;">
-<p><div class="zwei"></div>単線（1線）</p>
+<p><div class="ein"></div>単線（1線）</p>
 <p><div class="zwei"></div>複線（2線）</p>
-<p><div class="drei"></div>三線（3線）</p>
 <p><div class="drei"></div>三線（3線）</p>
 <p><div class="vier"></div>複々線（4線）</p>
 <p><div class="sechs"></div>三複線（6線）</p>
@@ -98,6 +97,16 @@ const map = L.map('map', { zoomSnap: 0.1 })
 
 let sta01original, rail01original, sta_name01original;
 let sta01layer, rail01layer, sta_name01layer;
+let sta02original, rail02original, sta_name2original;
+let sta02layer, rail02layer, sta_name02layer;
+let sta03original, rail03original, sta_name03original;
+let sta03layer, rail03layer, sta_name03layer;
+let sta04original, rail04original, sta_name04original;
+let sta04layer, rail04layer, sta_name04layer;
+let sta05original, rail05original, sta_name05original;
+let sta05layer, rail05layer, sta_name05layer;
+let sta06original, rail06original, sta_name06original;
+let sta06layer, rail06layer, sta_name06layer;
 const thresholdInput = document.getElementById('threshold');
 const thresholdLabel = document.getElementById('threshold-label');
 const monthInput = document.getElementById('month-va');
@@ -1105,6 +1114,7 @@ function init(){
     
 </body>
 </html>
+
 
 
 
