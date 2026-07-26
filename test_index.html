@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>Leaflet.timeline 外部GeoJSON例</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script src="https://unpkg.com/leaflet-timeline/dist/leaflet.timeline.min.js"></script>
+<style>
+  #map { height: 500px; }
+</style>
+</head>
+<body>
+
+<h2>Leaflet.timeline 外部GeoJSON読み込み</h2>
+<div id="map"></div>
+
+<script>
+// マップ初期化
+const map = L.map('map').setView([35.5, 137], 5);
+
+// 背景タイル
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  attribution: '&copy; OpenStreetMap contributors'
+}).addTo(map);
+
+// 外部GeoJSON読み込み
+fetch('02_Rail_tohoku.geojson')
+  .then(response => {
+    if (!response.ok) throw new Error("GeoJSON読み込み失敗");
+    return response.json();
+  })
+  .then(data => {
+    // Timelineレイヤー作成
+    const timeline = L.timeline(data, {
+      getInterval: feature => ({
+        start: new Date(feature.properties.times[0]),
+        end: new Date(feature.properties.times[1])
+      }),
+      pointToLayer: (feature, latlng) =>
+        L.circleMarker(latlng, { radius: 8, color: 'red' })
+          .bindPopup(feature.properties.name)
+    });
+
+    // スライダーコントロール
+    const timelineControl = L.timelineSliderControl({
+      formatOutput: date => new Date(date).toLocaleDateString(),
+      steps: 100,
+      duration: 1000
+    });
+
+    map.addControl(timelineControl);
+    timelineControl.addTo(map);
+    timeline.addTo(map);
+  })
+  .catch(err => console.error(err));
+</script>
+
+</body>
+</html>
