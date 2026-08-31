@@ -59,22 +59,32 @@
 </div>
 <label><input type="radio" id="gauge" name="layer" value="2">軌間</label>
 <div id="iii" style="display: none;">
-    <p><div class="red_line"></div>1435mm<br><div class="red_line"></div>1435mm</p>
-    <p><div class="purple_line"></div>1372mm</p>
+    <p><div class="red_line"></div>1435mm</p>
+    <p><div class="darkgreen_line"></div>1391mm</p>
+    <p><div class="navy_line"></div>1372mm</p>
     <p><div class="blue_line"></div>1067mm</p>
     <p><div class="green_line"></div>1050mm</p>
-    <p><div class="brown_line"></div>762mm</p>
+    <p><div class="yellowgreen_line"></div>838mm</p>
+    <p><div class="purple_line"></div>762mm</p>
+    <p><div class="pink_line"></div>737mm</p>
+    <p><div class="soil_line"></div>635mm</p>
+    <p><div class="brown_line"></div>610mm</p>
+    <p><div class="darkred_line"></div>600mm</p>
+    <p><div class="black_line"></div>576mm</p>
     <p><div class="pink_line"></div>モノレール</p>
-    <p><div class="navy_line"></div>新交通・そのほか</p>
-    <p><div class="black_line"></div>不明</p>
+    <p><div class="navy_line"></div>新交通</p>
+    <p><div class="gray_line"></div>バス</p>
 </div>
 <label><input type="radio" id="Electrific" name="layer" value="3">電化</label>
 <div id="uuu" style="display: none;">
     <p><div class="red_line"></div>AC 25,000V</p>
     <p><div class="pink_line"></div>AC 20,000V</p>
-    <p><div class="navy_line"></div>DC 1,500V</p>
-    <p><div class="blue_line"></div>DC 750V</p>
-    <p><div class="green_line"></div>DC 600V</p>
+    <p><div class="orange_line"></div>AC 600V</p>
+    <p><div class="blue_line"></div>DC 1,500V</p>
+    <p><div class="navy_line"></div>DC 1,200V</p>
+    <p><div class="green_line"></div>DC 750V</p>
+    <p><div class="purple_line"></div>DC 600V</p>
+    <p><div class="brown_line"></div>DC 550V</p>
     <p><div class="black_line"></div>非電化</p>
 </div>
 
@@ -321,19 +331,31 @@ function updateLayer() {
                              '#777777';//灰
       } else if (gauge_size.checked) {
         styleOptions.color = features.properties.gauge === 1435 ? '#ff0000' ://赤
-                             features.properties.gauge === 1372 ? '#880088' ://紫
-                             features.properties.gauge === 1067 ? '#0088ff' ://青
+                             features.properties.gauge === 1391 ? '#005522' ://深緑
+                             features.properties.gauge === 1372 ? '#0000aa' ://紺
+                             features.properties.gauge === 1067 ? '#0088ff' ://水
                              features.properties.gauge === 1050 ? '#008800' ://緑
-                             features.properties.gauge === 762 ? '#773300' ://茶
+                             features.properties.gauge === 838 ? '#77bb00' ://黄緑
+                             features.properties.gauge === 762 ? '#880088' ://紫
+                             features.properties.gauge === 737 ? '#880088' ://紫
+                             features.properties.gauge === 635 ? '#552200' ://茶
+                             features.properties.gauge === 610 ? '#773300' ://黄土
+                             features.properties.gauge === 600 ? '#660000' ://紅
+                             features.properties.gauge === 576 ? '#000000' ://黒
                              features.properties.gauge === 1 ? '#ff55cc' ://桃 モノレール
-                             features.properties.gauge === 2 ? '#0000aa' ://紺 新交通
+                             features.properties.gauge === 2 ? '#dd6600' ://橙 新交通
+                             features.properties.gauge === 3 ? '#777777' ://灰 バス
                              '#000000';//黒
       } else if (elect.checked) {
         styleOptions.color = features.properties.Electrific === 'AC 25000V' ? '#ff0000' ://赤
                              features.properties.Electrific === 'AC 20000V' ? '#ff55cc' ://桃
-                             features.properties.Electrific === 'DC 1500V' ? '#0000aa' ://紺
-                             features.properties.Electrific === 'DC 750V' ? '#0088ff' ://青
-                             features.properties.Electrific === 'DC 600V' ? '#008800' ://緑
+                             features.properties.Electrific === 'AC 600V' ? '#dd6600' ://橙
+                             features.properties.Electrific === 'DC 1500V' ? '#0088ff' ://水
+                             features.properties.Electrific === 'DC 1200V' ? '#0000aa' ://紺
+                             features.properties.Electrific === 'DC 750V' ? '#008800' ://緑
+                             features.properties.Electrific === 'DC 600V' ? '#880088' ://紫
+                             features.properties.Electrific === 'DC 550V' ? '#773300' ://茶
+                             features.properties.Electrific === 'バス' ? '#777777' ://灰
                              '#000000';//黒
       } else {
         styleOptions.color = '#000000';//黒
@@ -370,13 +392,22 @@ function updateLayer() {
     
     pointToLayer: function(features, latlng) {
       var staicon = features.properties.type === '信号場' ? "ss" :
-                    features.properties.type === '仮信号場' ? "ss" :
+                    features.properties.type === '連絡所' ? "ss" :
+                    features.properties.type === '聯絡所' ? "ss" :
                     features.properties.type === '臨時信号場' ? "ss" :
+                    features.properties.type === '仮信号場' ? "ss" :
+                    features.properties.type === '待避場' ? "ss" :
+                    features.properties.type === '待避所' ? "ss" :
                     features.properties.type === '交換所' ? "ss" :
+                    features.properties.type === '分岐点' ? "ss" :
+                    features.properties.type === '分界点' ? "ss" :
+                    features.properties.type === '合図所' ? "ss" :		  
                     features.properties.type === '貨物駅' ? "fs" :
-                    features.properties.type === '仮貨物駅' ? "fs" :
                     features.properties.type === '操車場' ? "fs" :
+                    features.properties.type === '臨時貨物駅' ? "fs" :
+                    features.properties.type === '仮貨物駅' ? "fs" :
                     features.properties.type === 'バス停' ? "bs" :
+                    features.properties.type === '臨時バス停' ? "bs" :
                     "st";
       
       return L.marker(latlng, {icon: staicon === "st" ? L.icon({iconUrl: 'sta.svg', iconSize: [10, 10]}) :
